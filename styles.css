@@ -717,10 +717,13 @@ body::after {
 }
 
 .products-grid .card-image {
-  min-height: 140px;
+  min-height: 200px;
   aspect-ratio: 1 / 1;
   border-radius: 10px;
   margin-bottom: 0.3rem;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 .products-grid .card h3 {
