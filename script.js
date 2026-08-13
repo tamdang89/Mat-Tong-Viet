@@ -1228,32 +1228,87 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
 /* Contact form handling (site-wide) */
 const contactForm = document.getElementById('contactForm');
 const contactResponse = document.getElementById('contactResponse');
-const contactReset = document.getElementById('contactReset');
+const contactSuccess = document.getElementById('contactSuccess');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const fd = new FormData(contactForm);
     const name = sanitizeText(fd.get('name') || '', 80);
     const email = sanitizeText(fd.get('email') || '', 120);
     const phone = sanitizeText(fd.get('phone') || '', 20);
+    const subject = sanitizeText(fd.get('subject') || '', 100);
     const message = sanitizeText(fd.get('message') || '', 1000);
 
     if (!name || name.length < 2 || !isValidEmail(email) || !isValidPhone(phone) || message.length < 10) {
-      if (contactResponse) contactResponse.textContent = 'Vui lòng điền đầy đủ và đúng định dạng thông tin.';
+      if (contactResponse) {
+        contactResponse.style.display = 'block';
+        contactResponse.textContent = 'Vui lòng điền đầy đủ và đúng định dạng thông tin.';
+      }
       return;
     }
 
+    // Show processing indicator
+    if (contactResponse) {
+      contactResponse.style.display = 'block';
+      contactResponse.textContent = 'Đang xử lý...';
+    }
+    contactForm.style.opacity = '0.6';
+    contactForm.style.pointerEvents = 'none';
+
     try {
-      const leads = JSON.parse(localStorage.getItem('contact_leads') || '[]');
-      leads.push({ name, email, phone, message, ts: Date.now() });
-      localStorage.setItem('contact_leads', JSON.stringify(leads));
-    } catch (err) { /* ignore storage errors */ }
+      // Prepare contact data for Supabase
+      const contactData = {
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject,
+        message: message
+      };
 
-    if (contactResponse) contactResponse.textContent = 'Cảm ơn! Chúng tôi đã nhận được thông tin của bạn.';
-    contactForm.reset();
+      // Insert to Supabase
+      const { data, error } = await supabaseClient
+        .from('contacts')
+        .insert([contactData]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        if (contactResponse) {
+          contactResponse.style.display = 'block';
+          contactResponse.style.color = '#e74c3c';
+          contactResponse.textContent = `Lỗi: ${error.message}. Vui lòng thử lại.`;
+        }
+        contactForm.style.opacity = '1';
+        contactForm.style.pointerEvents = 'auto';
+        return;
+      }
+
+      // Success: hide form, show success message
+      contactForm.style.display = 'none';
+      if (contactResponse) {
+        contactResponse.style.display = 'none';
+      }
+      if (contactSuccess) {
+        contactSuccess.style.display = 'block';
+      }
+      
+      // Also save to localStorage as backup
+      try {
+        const leads = JSON.parse(localStorage.getItem('contact_leads') || '[]');
+        leads.push({ name, email, phone, subject, message, ts: Date.now() });
+        localStorage.setItem('contact_leads', JSON.stringify(leads));
+      } catch (err) { /* ignore storage errors */ }
+
+    } catch (err) {
+      console.error('Contact form error:', err);
+      if (contactResponse) {
+        contactResponse.style.display = 'block';
+        contactResponse.style.color = '#e74c3c';
+        contactResponse.textContent = 'Lỗi kết nối. Vui lòng thử lại.';
+      }
+      contactForm.style.opacity = '1';
+      contactForm.style.pointerEvents = 'auto';
+    }
   });
-
-  contactReset?.addEventListener('click', () => contactForm.reset());
 }
 
 /* Order form handling (checkout page) */
