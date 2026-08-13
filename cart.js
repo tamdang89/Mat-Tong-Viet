@@ -280,7 +280,7 @@ function renderCheckoutSidebar() {
 }
 
 // ── Xử lý đặt hàng ──
-function handleOrder(e) {
+async function handleOrder(e) {
   e.preventDefault();
   const form = e.target;
   const fd = new FormData(form);
@@ -296,63 +296,105 @@ function handleOrder(e) {
   const cart = getCart();
   const total = getCartTotal();
 
-  // Lưu đơn hàng vào localStorage
+  // Disable submit button and show processing
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Đang xử lý đơn hàng...';
+  }
+
   try {
-    const orders = JSON.parse(localStorage.getItem('tth_orders') || '[]');
-    orders.push({
-      id: orderId,
-      items: cart,
-      total: total,
-      customer: data,
-      payment: data.payment,
-      ts: Date.now()
-    });
-    localStorage.setItem('tth_orders', JSON.stringify(orders));
-  } catch {}
+    // Prepare order data - match actual Supabase columns
+    const orderData = {
+      order_code: orderId,
+      fullname: data.fullname,
+      email: data.email,
+      phone: data.phone
+    };
 
-  // Hiển thị trang thành công
-  document.getElementById('checkoutForm').style.display = 'none';
-  document.querySelector('.checkout-steps').querySelectorAll('.step')[2].classList.add('active');
-  document.querySelector('.checkout-steps').querySelectorAll('.step-line')[1].classList.add('done');
+    // Call Supabase to insert order
+    const { data: insertData, error } = await supabaseClient
+      .from('orders')
+      .insert([orderData]);
 
-  const successEl = document.getElementById('orderSuccess');
-  successEl.style.display = 'block';
-  document.getElementById('orderId').textContent = orderId;
+    if (error) {
+      console.error('Lỗi Supabase:', error);
+      if (submitBtn) {
+        submitBtn.textContent = `❌ Lỗi: ${error.message}`;
+        submitBtn.disabled = false;
+      }
+      setTimeout(() => {
+        if (submitBtn) submitBtn.textContent = '✅ Đặt hàng';
+      }, 3000);
+      return;
+    }
 
-  const paymentLabels = { cod: 'Thanh toán khi nhận hàng', bank: 'Chuyển khoản ngân hàng', momo: 'Ví MoMo / ZaloPay' };
+    // Order successfully inserted - show success page
+    document.getElementById('checkoutForm').style.display = 'none';
+    const steps = document.querySelector('.checkout-steps');
+    if (steps) {
+      steps.querySelectorAll('.step')[2].classList.add('active');
+      steps.querySelectorAll('.step-line')[1].classList.add('done');
+    }
 
-  const successDetails = document.getElementById('successDetails');
-  successDetails.textContent = '';
+    const successEl = document.getElementById('orderSuccess');
+    if (successEl) successEl.style.display = 'block';
+    
+    const orderIdEl = document.getElementById('orderId');
+    if (orderIdEl) orderIdEl.textContent = orderId;
 
-  const successGrid = document.createElement('div');
-  successGrid.className = 'success-info-grid';
+    const paymentLabels = { cod: 'Thanh toán khi nhận hàng', bank: 'Chuyển khoản ngân hàng', momo: 'Ví MoMo / ZaloPay' };
 
-  const fields = [
-    ['Người nhận:', data.fullname],
-    ['Điện thoại:', data.phone],
-    ['Email:', data.email],
-    ['Địa chỉ:', `${data.address}, ${data.district || ''}, ${data.city}`],
-    ['Thanh toán:', paymentLabels[data.payment] || data.payment],
-    ['Tổng tiền:', formatVND(total)],
-    ['Số sản phẩm:', String(cart.reduce((s, i) => s + i.qty, 0))]
-  ];
+    const successDetails = document.getElementById('successDetails');
+    if (successDetails) {
+      successDetails.textContent = '';
 
-  fields.forEach(([label, value]) => {
-    const item = document.createElement('div');
-    const strong = document.createElement('strong');
-    strong.textContent = label;
-    item.appendChild(strong);
-    item.appendChild(document.createTextNode(` ${String(value || '')}`));
-    successGrid.appendChild(item);
-  });
+      const successGrid = document.createElement('div');
+      successGrid.className = 'success-info-grid';
 
-  successDetails.appendChild(successGrid);
+      const fields = [
+        ['Người nhận:', data.fullname],
+        ['Điện thoại:', data.phone],
+        ['Email:', data.email],
+        ['Địa chỉ:', `${data.address}, ${data.district || ''}, ${data.city}`],
+        ['Thanh toán:', paymentLabels[data.payment] || data.payment],
+        ['Tổng tiền:', formatVND(total)],
+        ['Số sản phẩm:', String(cart.reduce((s, i) => s + i.qty, 0))]
+      ];
 
-  // Xóa giỏ hàng
-  clearCart();
+      fields.forEach(([label, value]) => {
+        const item = document.createElement('div');
+        const strong = document.createElement('strong');
+        strong.textContent = label;
+        item.appendChild(strong);
+        item.appendChild(document.createTextNode(` ${String(value || '')}`));
+        successGrid.appendChild(item);
+      });
 
-  // Cuộn lên đầu
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+      successDetails.appendChild(successGrid);
+    }
+
+    // Xóa giỏ hàng
+    clearCart();
+
+    // Cuộn lên đầu
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Redirect sau 5 seconds
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 5000);
+
+  } catch (err) {
+    console.error('Lỗi khi xử lý đơn hàng:', err);
+    if (submitBtn) {
+      submitBtn.textContent = '❌ Lỗi: Không thể xử lý đơn hàng';
+      submitBtn.disabled = false;
+    }
+    setTimeout(() => {
+      if (submitBtn) submitBtn.textContent = '✅ Đặt hàng';
+    }, 3000);
+  }
 }
 
 // ── Phương thức thanh toán toggle ──
