@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanh toán - Phật Giáo Mật Tông</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 data-i18n="title">Phật Giáo Mật Tông</h1>
+          <p data-i18n="subtitle">TRÍ TUỆ SOI ĐƯỜNG - TỪ BI DẪN LỐI</p>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" data-i18n="navHome">Trang chủ</a>
+        <div class="has-submenu">
+          <a href="products.html" class="submenu-toggle">Sản phẩm ▾</a>
+          <div class="submenu" aria-label="Sản phẩm danh mục">
+            <a href="products.html?cat=tuong">Tượng</a>
+            <a href="products.html?cat=do-tho">Đồ Thờ</a>
+            <a href="products.html?cat=phap-khi">Pháp Khí</a>
+            <a href="products.html?cat=tranh">Tranh (Thangka)</a>
+            <a href="products.html?cat=vat-pham-oto">Vật Phẩm Phong Thuỷ</a>
+          </div>
+        </div>
+        <a href="blog.html" data-i18n="navBlog">Blog</a>
+        <a href="faq.html" data-i18n="navFaq">FAQ</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html" data-i18n="navContact">Liên hệ</a>
+      </nav>
+      <div class="lang-switch">
+        <button id="viBtn" class="active">Tiếng Việt</button>
+        <button id="enBtn">English</button>
+      </div>
+      <a href="cart.html" class="cart-header-link" title="Giỏ hàng">
+        Giỏ hàng <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Thanh tiến trình -->
+    <div class="checkout-steps">
+      <div class="step done">
+        <span class="step-num">1</span>
+        <span class="step-label">Giỏ hàng</span>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step active">
+        <span class="step-num">2</span>
+        <span class="step-label">Thanh toán</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-label">Hoàn tất</span>
+      </div>
+    </div>
+
+    <section class="checkout-page">
+      <!-- Form thanh toán -->
+      <div id="checkoutForm" class="checkout-grid">
+        <div class="checkout-info">
+          <h2>Thông tin giao hàng</h2>
+          <form id="orderForm" class="order-form">
+            <div class="form-row">
+              <label>
+                <span>Họ và tên <em>*</em></span>
+                <input type="text" name="fullname" placeholder="Nguyễn Văn A" required>
+              </label>
+            </div>
+            <div class="form-row form-row-2col">
+              <label>
+                <span>Email <em>*</em></span>
+                <input type="email" name="email" placeholder="email@example.com" required>
+              </label>
+              <label>
+                <span>Số điện thoại <em>*</em></span>
+                <input type="tel" name="phone" placeholder="0888 633 133" required>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                <span>Địa chỉ giao hàng <em>*</em></span>
+                <input type="text" name="address" placeholder="Số nhà, đường, phường/xã" required>
+              </label>
+            </div>
+            <div class="form-row form-row-2col">
+              <label>
+                <span>Tỉnh/Thành phố <em>*</em></span>
+                <select name="city" required>
+                  <option value="">-- Chọn --</option>
+                  <option value="danang">Đà Nẵng</option>
+                  <option value="hochiminh">TP. Hồ Chí Minh</option>
+                  <option value="hanoi">Hà Nội</option>
+                  <option value="hue">Huế</option>
+                  <option value="cantho">Cần Thơ</option>
+                  <option value="other">Tỉnh khác</option>
+                </select>
+              </label>
+              <label>
+                <span>Quận/Huyện</span>
+                <input type="text" name="district" placeholder="Quận/Huyện">
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                <span>Ghi chú đơn hàng</span>
+                <textarea name="note" rows="3" placeholder="Ghi chú thêm cho đơn hàng (không bắt buộc)"></textarea>
+              </label>
+            </div>
+
+            <h3>Phương thức thanh toán</h3>
+            <div class="payment-methods">
+              <label class="payment-option selected">
+                <input type="radio" name="payment" value="cod" checked>
+                <div class="payment-option-inner">
+                  <span class="payment-icon">💵</span>
+                  <div>
+                    <strong>Thanh toán khi nhận hàng (COD)</strong>
+                    <p>Trả tiền mặt khi nhận hàng tại nhà</p>
+                  </div>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="bank">
+                <div class="payment-option-inner">
+                  <span class="payment-icon">🏦</span>
+                  <div>
+                    <strong>Chuyển khoản ngân hàng</strong>
+                    <p>Chuyển khoản trước qua tài khoản ngân hàng</p>
+                  </div>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment" value="momo">
+                <div class="payment-option-inner">
+                  <span class="payment-icon">📱</span>
+                  <div>
+                    <strong>Ví MoMo / ZaloPay</strong>
+                    <p>Thanh toán qua ví điện tử</p>
+                  </div>
+                </div>
+              </label>
+            </div>
+
+            <!-- Thông tin chuyển khoản (ẩn mặc định) -->
+            <div id="bankInfo" class="bank-info" style="display:none;">
+              <h4>Thông tin chuyển khoản</h4>
+              <div class="bank-details">
+                <p><strong>Ngân hàng:</strong> Vietcombank</p>
+                <p><strong>Chủ tài khoản:</strong> CH Văn Hoá Phẩm Phật Giáo TTH</p>
+                <p><strong>Số tài khoản:</strong> 048089005611</p>
+                <p><strong>Nội dung:</strong> <span id="bankNote">Tên + SĐT</span></p>
+              </div>
+            </div>
+
+            <button type="submit" class="button checkout-submit-btn" id="placeOrderBtn">
+              ✅ Đặt hàng
+            </button>
+          </form>
+        </div>
+
+        <!-- Sidebar: tóm tắt đơn hàng -->
+        <div class="checkout-sidebar">
+          <div class="order-summary-card">
+            <h3>Đơn hàng của bạn</h3>
+            <div id="checkoutItems" class="checkout-items">
+              <!-- JS render -->
+            </div>
+            <div class="order-summary-totals">
+              <div class="summary-row">
+                <span>Tạm tính</span>
+                <span id="ckSubtotal">0₫</span>
+              </div>
+              <div class="summary-row">
+                <span>Phí vận chuyển</span>
+                <span id="ckShipping">Miễn phí</span>
+              </div>
+              <div class="summary-row summary-total">
+                <span>Tổng cộng</span>
+                <span id="ckTotal">0₫</span>
+              </div>
+            </div>
+            <a href="cart.html" class="edit-cart-link">← Quay lại giỏ hàng</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trang thành công (ẩn mặc định) -->
+      <div id="orderSuccess" class="order-success" style="display:none;">
+        <div class="success-icon">✅</div>
+        <h2>Đặt hàng thành công!</h2>
+        <p class="success-order-id">Mã đơn hàng: <strong id="orderId"></strong></p>
+        <p>Cảm ơn bạn đã đặt hàng tại <strong>CH Văn Hoá Phẩm Phật Giáo TTH</strong>.<br>
+        Chúng tôi sẽ liên hệ xác nhận trong thời gian sớm nhất.</p>
+        <div class="success-details" id="successDetails"></div>
+        <div class="success-actions">
+          <a href="index.html" class="button">Về trang chủ</a>
+          <a href="products.html" class="button secondary">Tiếp tục mua sắm</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-bottom">
+        <div class="footer-copyright">© Buddha Weekly. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>

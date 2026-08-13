@@ -1,0 +1,30 @@
+# Secrets and environment files
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+
+# Logs and dumps
+*.log
+*.sql
+*.sqlite
+*.bak
+*.old
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+node_modules/
+coverage/
+.dist/
+.cache/
+
+# Local runtime files
+*.local
+*.tmp

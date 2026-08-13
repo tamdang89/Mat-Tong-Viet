@@ -1,0 +1,19 @@
+{
+  "siteBase": "https://example.com/",
+  "posts": [
+    {"id":"blog-post-1","url":"blog-post-1.html","title":"Hành trình giác ngộ","excerpt":"Hướng dẫn thực hành hàng ngày để nuôi dưỡng tâm bình an.","image":"https://images.unsplash.com/photo-1518991791752-1e9e5d0b01d6?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"blog-post-2","url":"blog-post-2.html","title":"Thiền định nội quán","excerpt":"Thiết lập buổi thiền định kiên định và nhẹ nhàng.","image":"https://images.unsplash.com/photo-1523301343968-766c41f36663?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"blog-post-3","url":"blog-post-3.html","title":"Chú nguyện và chú lệnh","excerpt":"Giải thích công dụng chú nguyện Mật tông và cách thực hành.","image":"https://images.unsplash.com/photo-1516131206005-3b99f4bd029c?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"blog-post-4","url":"blog-post-4.html","title":"Vượt qua loạn động tâm","excerpt":"Áp dụng giáo lý Mật tông để bình ổn cảm xúc.","image":"https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"blog-post-5","url":"blog-post-5.html","title":"Pháp khí và biểu tượng","excerpt":"Ý nghĩa cờ Mật tông, kim cương chùy và liên hoa.","image":"https://images.unsplash.com/photo-1496200186974-4293800e2c20?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"blog-post-6","url":"blog-post-6.html","title":"Âm thanh và chú ngữ","excerpt":"Cách dùng âm thanh chánh niệm để mở rộng năng lượng tâm linh.","image":"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80"}
+  ],
+  "products": [
+    {"id":"product-1","url":"product-1.html","title":"Bộ khóa huấn luyện","excerpt":"Khóa học trực tuyến cho người mới bắt đầu — 6 tuần.","image":"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"product-2","url":"product-2.html","title":"Tài liệu học tập","excerpt":"PDF hướng dẫn, trích dẫn kinh điển và bài tập.","image":"https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"product-3","url":"product-3.html","title":"Khóa học nhóm","excerpt":"Buổi học trực tuyến tương tác — 8 buổi.","image":"https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"product-4","url":"product-4.html","title":"Đường dẫn thực hành","excerpt":"12 bước để xây dựng thời khoá biểu tu tập.","image":"https://images.unsplash.com/photo-1496200186974-4293800e2c20?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"product-5","url":"product-5.html","title":"Âm nhạc thiền","excerpt":"Tuyển tập âm nhạc hỗ trợ thiền và chú nguyện.","image":"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80"},
+    {"id":"product-6","url":"product-6.html","title":"Chương trình cộng đồng","excerpt":"Sự kiện trực tuyến kết nối cộng đồng.","image":"https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80"}
+  ]
+}

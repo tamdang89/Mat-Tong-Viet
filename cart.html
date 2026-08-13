@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giỏ hàng - Phật Giáo Mật Tông</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 data-i18n="title">Phật Giáo Mật Tông</h1>
+          <p data-i18n="subtitle">TRÍ TUỆ SOI ĐƯỜNG - TỪ BI DẪN LỐI</p>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" data-i18n="navHome">Trang chủ</a>
+        <div class="has-submenu">
+          <a href="products.html" class="submenu-toggle">Sản phẩm ▾</a>
+          <div class="submenu" aria-label="Sản phẩm danh mục">
+            <a href="products.html?cat=tuong">Tượng</a>
+            <a href="products.html?cat=do-tho">Đồ Thờ</a>
+            <a href="products.html?cat=phap-khi">Pháp Khí</a>
+            <a href="products.html?cat=tranh">Tranh (Thangka)</a>
+            <a href="products.html?cat=vat-pham-oto">Vật Phẩm Phong Thuỷ</a>
+          </div>
+        </div>
+        <a href="blog.html" data-i18n="navBlog">Blog</a>
+        <a href="faq.html" data-i18n="navFaq">FAQ</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html" data-i18n="navContact">Liên hệ</a>
+      </nav>
+      <div class="lang-switch">
+        <button id="viBtn" class="active">Tiếng Việt</button>
+        <button id="enBtn">English</button>
+      </div>
+      <a href="cart.html" class="cart-header-link" title="Giỏ hàng">
+        Giỏ hàng <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="cart-page">
+      <div class="cart-page-header">
+        <h2>🛒 Giỏ hàng của bạn</h2>
+        <a href="products.html" class="button secondary">← Tiếp tục mua sắm</a>
+      </div>
+
+      <!-- Giỏ hàng trống -->
+      <div id="cartEmpty" class="cart-empty" style="display:none;">
+        <div class="cart-empty-icon">🪷</div>
+        <h3>Giỏ hàng đang trống</h3>
+        <p>Hãy khám phá các sản phẩm Phật giáo Mật tông của chúng tôi</p>
+        <a href="products.html" class="button">Xem sản phẩm</a>
+      </div>
+
+      <!-- Giỏ hàng có sản phẩm -->
+      <div id="cartContent" style="display:none;">
+        <div class="cart-table-wrapper">
+          <table class="cart-table">
+            <thead>
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cartBody">
+              <!-- JS sẽ render dòng sản phẩm ở đây -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cart-summary">
+          <div class="cart-summary-row">
+            <span>Tạm tính:</span>
+            <span id="cartSubtotal">0₫</span>
+          </div>
+          <div class="cart-summary-row">
+            <span>Phí vận chuyển:</span>
+            <span id="cartShipping">Miễn phí</span>
+          </div>
+          <div class="cart-summary-row cart-summary-total">
+            <span>Tổng cộng:</span>
+            <span id="cartTotal">0₫</span>
+          </div>
+          <div class="cart-actions">
+            <button class="button secondary" id="clearCartBtn">🗑 Xóa giỏ hàng</button>
+            <a href="checkout.html" class="button" id="checkoutBtn">Tiến hành thanh toán →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-grid">
+        <div class="footer-column footer-contact">
+          <h3>LIÊN HỆ</h3>
+          <div class="footer-box">
+            <p><strong>CH Văn Hoá Phẩm Phật Giáo TTH</strong></p>
+            <p>Địa chỉ: 210 Hà Huy Tập, Tp Đà Nẵng</p>
+            <p>Điện thoại: 0888633133</p>
+            <p>Email: TTHGroup@gmail.com</p>
+          </div>
+        </div>
+        <div class="footer-column footer-policies">
+          <h3>CHÍNH SÁCH &amp; QUY ĐỊNH</h3>
+          <div class="footer-box">
+            <ul class="footer-list">
+              <li><a href="#">Hình thức thanh toán</a></li>
+              <li><a href="#">Chính sách vận chuyển</a></li>
+              <li><a href="#">Chính sách đổi trả</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-column footer-guides">
+          <h3>HƯỚNG DẪN</h3>
+          <div class="footer-box">
+            <ul class="footer-list">
+              <li><a href="#">Hướng dẫn mua hàng</a></li>
+              <li><a href="#">Câu hỏi thường gặp</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© Buddha Weekly. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>

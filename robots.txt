@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /.git/
+Disallow: /.env
+Disallow: /.vscode/
+Disallow: /private/
+Disallow: /admin/
+
+Sitemap: https://example.com/sitemap.xml

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ - Mật Tông Việt</title>
+  <meta name="description" content="Liên hệ CH Văn Hoá Phẩm Phật Giáo TTH - 210 Hà Huy Tập, Đà Nẵng. Hotline: 0888633133">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── CONTACT PAGE PREMIUM STYLES ── */
+    .contact-hero {
+      position: relative;
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(180deg, rgba(30,12,5,0.7) 0%, rgba(60,25,10,0.5) 100%);
+    }
+    .contact-hero h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      color: #ffd67a;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .contact-hero p {
+      color: #f2e6d0;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    .contact-hero .decorative-line {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #c36b18, transparent);
+      margin: 1rem auto 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* ── Info Cards Row ── */
+    .contact-info-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      max-width: 1200px;
+      margin: -2rem auto 2.5rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .contact-info-card {
+      background: linear-gradient(145deg, rgba(45,20,8,0.95), rgba(30,12,5,0.98));
+      border: 1px solid rgba(195,107,24,0.3);
+      border-radius: 16px;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #c36b18, #ffd67a, #c36b18);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .contact-info-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(195,107,24,0.6);
+      box-shadow: 0 12px 40px rgba(195,107,24,0.15);
+    }
+    .contact-info-card:hover::before { opacity: 1; }
+    .contact-info-card .info-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.8rem;
+      filter: drop-shadow(0 2px 6px rgba(195,107,24,0.3));
+    }
+    .contact-info-card h4 {
+      font-family: 'Cinzel', serif;
+      color: #ffd67a;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .contact-info-card p {
+      color: #f2e6d0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .contact-info-card a {
+      color: #ffd67a;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-info-card a:hover { color: #fff; }
+
+    /* ── Main Content Grid ── */
+    .contact-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Form Card ── */
+    .contact-form-card {
+      background: linear-gradient(145deg, rgba(45,20,8,0.95), rgba(30,12,5,0.98));
+      border: 1px solid rgba(195,107,24,0.25);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form-card::after {
+      content: '☸';
+      position: absolute;
+      bottom: -20px; right: -10px;
+      font-size: 8rem;
+      opacity: 0.03;
+      color: #ffd67a;
+    }
+    .contact-form-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #ffd67a;
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .contact-form-card .form-subtitle {
+      color: #c9a96e;
+      font-size: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+    .contact-form .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .contact-form .form-group label {
+      display: block;
+      color: #f2e6d0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+    }
+    .contact-form .form-group label em {
+      color: #e74c3c;
+      font-style: normal;
+    }
+    .contact-form .form-group input,
+    .contact-form .form-group textarea,
+    .contact-form .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(195,107,24,0.25);
+      border-radius: 10px;
+      color: #f2e6d0;
+      font-size: 0.95rem;
+      font-family: 'Outfit', sans-serif;
+      transition: all 0.3s;
+      box-sizing: border-box;
+    }
+    .contact-form .form-group input:focus,
+    .contact-form .form-group textarea:focus {
+      outline: none;
+      border-color: #c36b18;
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 0 3px rgba(195,107,24,0.12);
+    }
+    .contact-form .form-group input::placeholder,
+    .contact-form .form-group textarea::placeholder {
+      color: rgba(242,230,208,0.35);
+    }
+    .contact-form .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .contact-form .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+    .contact-form .form-group select option {
+      background: #2d1408;
+      color: #f2e6d0;
+    }
+    .contact-submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #c36b18, #a0520a);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.35s;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .contact-submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s;
+    }
+    .contact-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(195,107,24,0.35);
+    }
+    .contact-submit-btn:hover::before { left: 100%; }
+
+    /* ── Map & Social Card ── */
+    .contact-right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .contact-map-card {
+      background: linear-gradient(145deg, rgba(45,20,8,0.95), rgba(30,12,5,0.98));
+      border: 1px solid rgba(195,107,24,0.25);
+      border-radius: 20px;
+      padding: 1.5rem;
+      flex: 1;
+    }
+    .contact-map-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #ffd67a;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .contact-map-card .map-wrapper {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(195,107,24,0.2);
+      height: 280px;
+    }
+    .contact-map-card .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: sepia(0.2) contrast(1.05);
+    }
+    .contact-map-card .map-address {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      background: rgba(195,107,24,0.08);
+      border-radius: 10px;
+      border: 1px solid rgba(195,107,24,0.15);
+    }
+    .contact-map-card .map-address span {
+      font-size: 1.3rem;
+    }
+    .contact-map-card .map-address p {
+      color: #f2e6d0;
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Social Card ── */
+    .contact-social-card {
+      background: linear-gradient(145deg, rgba(45,20,8,0.95), rgba(30,12,5,0.98));
+      border: 1px solid rgba(195,107,24,0.25);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+    }
+    .contact-social-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #ffd67a;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.2rem;
+      background: rgba(195,107,24,0.08);
+      border: 1px solid rgba(195,107,24,0.2);
+      border-radius: 12px;
+      color: #f2e6d0;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: all 0.3s;
+    }
+    .social-link:hover {
+      background: rgba(195,107,24,0.2);
+      border-color: rgba(195,107,24,0.5);
+      transform: translateY(-2px);
+      color: #ffd67a;
+    }
+    .social-link .social-icon {
+      font-size: 1.3rem;
+    }
+
+    /* ── Success message ── */
+    .contact-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .contact-success .success-check {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    .contact-success h3 {
+      color: #ffd67a;
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-success p {
+      color: #c9a96e;
+      font-size: 0.95rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .contact-info-row { grid-template-columns: repeat(2, 1fr); }
+      .contact-main { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .contact-info-row { grid-template-columns: 1fr; }
+      .contact-hero h2 { font-size: 1.8rem; }
+      .contact-form-card { padding: 1.5rem; }
+      .contact-form .form-row-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 data-i18n="title">Mật Tông Việt</h1>
+          <p data-i18n="subtitle">TRÍ TUỆ SOI ĐƯỜNG - TỪ BI DẪN LỐI</p>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" data-i18n="navHome">Trang chủ</a>
+        <div class="has-submenu">
+          <a href="products.html" class="submenu-toggle">Sản phẩm ▾</a>
+          <div class="submenu" aria-label="Sản phẩm danh mục">
+            <a href="products.html?cat=tuong">Tượng</a>
+            <a href="products.html?cat=do-tho">Đồ Thờ</a>
+            <a href="products.html?cat=phap-khi">Pháp Khí</a>
+            <a href="products.html?cat=tranh">Tranh (Thangka)</a>
+            <a href="products.html?cat=vat-pham-oto">Vật Phẩm Phong Thuỷ</a>
+          </div>
+        </div>
+        <a href="blog.html" data-i18n="navBlog">Blog</a>
+        <a href="faq.html" data-i18n="navFaq">FAQ</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html" data-i18n="navContact">Liên hệ</a>
+      </nav>
+      <div class="lang-switch">
+        <button id="viBtn" class="active">Tiếng Việt</button>
+        <button id="enBtn">English</button>
+      </div>
+      <a href="cart.html" class="cart-header-link" title="Giỏ hàng">
+        Giỏ hàng <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="contact-hero">
+      <h2 data-i18n="contactHeroTitle">🙏 Liên hệ với chúng tôi</h2>
+      <div class="decorative-line"></div>
+      <p data-i18n="contactHeroText">Chúng tôi luôn sẵn sàng tư vấn và hỗ trợ bạn trên hành trình tu học và thỉnh vật phẩm Phật giáo</p>
+    </section>
+
+    <!-- Info Cards -->
+    <div class="contact-info-row">
+      <div class="contact-info-card">
+        <span class="info-icon">📞</span>
+        <h4>Hotline</h4>
+        <p><a href="tel:0888633133">0888 633 133</a></p>
+        <p style="font-size:0.8rem;opacity:0.7;margin-top:4px;" data-i18n="contactSupportHours">Hỗ trợ 8h - 21h hàng ngày</p>
+      </div>
+      <div class="contact-info-card">
+        <span class="info-icon">📧</span>
+        <h4>Email</h4>
+        <p><a href="mailto:TTHGroup@gmail.com">TTHGroup@gmail.com</a></p>
+        <p style="font-size:0.8rem;opacity:0.7;margin-top:4px;" data-i18n="contactResponseTime">Phản hồi trong 24 giờ</p>
+      </div>
+      <div class="contact-info-card">
+        <span class="info-icon">📍</span>
+        <h4 data-i18n="contactLocationLabel">Địa chỉ</h4>
+        <p>210 Hà Huy Tập<br>Tp. Đà Nẵng</p>
+      </div>
+      <div class="contact-info-card">
+        <span class="info-icon">🕐</span>
+        <h4 data-i18n="contactOpenHours">Giờ mở cửa</h4>
+        <p>Thứ 2 - CN<br>8:00 - 21:00</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="contact-main">
+      <!-- Form -->
+      <div class="contact-form-card">
+        <h3 data-i18n="contactFormTitle">✉️ Gửi lời nhắn</h3>
+        <p class="form-subtitle" data-i18n="contactFormSubtitle">Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại sớm nhất</p>
+
+        <form id="contactForm" class="contact-form">
+          <div class="form-group">
+            <label data-i18n="contactName">Họ và tên <em>*</em></label>
+            <input type="text" name="name" placeholder="Nhập họ và tên" data-i18n-placeholder="contactNamePlaceholder" required>
+          </div>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label data-i18n="contactEmail">Email <em>*</em></label>
+              <input type="email" name="email" placeholder="email@example.com" required>
+            </div>
+            <div class="form-group">
+              <label data-i18n="contactPhone">Số điện thoại <em>*</em></label>
+              <input type="tel" name="phone" placeholder="0888 xxx xxx" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="contactSubject">Chủ đề</label>
+            <select name="subject">
+              <option value="" data-i18n="contactSubjectPlaceholder">-- Chọn chủ đề --</option>
+              <option value="tuvan" data-i18n="contactTopicConsult">Tư vấn sản phẩm</option>
+              <option value="donhang" data-i18n="contactTopicOrder">Hỏi về đơn hàng</option>
+              <option value="baohanh" data-i18n="contactTopicWarranty">Bảo hành / Đổi trả</option>
+              <option value="hoptac" data-i18n="contactTopicPartnership">Hợp tác kinh doanh</option>
+              <option value="khac" data-i18n="contactTopicOther">Khác</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="contactMessage">Lời nhắn <em>*</em></label>
+            <textarea name="message" rows="5" placeholder="Nhập nội dung lời nhắn..." data-i18n-placeholder="contactMessagePlaceholder" required></textarea>
+          </div>
+          <button type="submit" class="contact-submit-btn" data-i18n="contactSubmit">🙏 Gửi lời nhắn</button>
+        </form>
+
+        <div class="contact-success" id="contactSuccess">
+          <div class="success-check">✅</div>
+          <h3 data-i18n="contactSuccessTitle">Gửi thành công!</h3>
+          <p data-i18n="contactSuccessText">Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="contact-right-col">
+        <!-- Map -->
+        <div class="contact-map-card">
+          <h3 data-i18n="contactMapTitle">📍 Vị trí cửa hàng</h3>
+          <div class="map-wrapper">
+            <iframe
+              src="https://www.google.com/maps?q=16.0544,108.2208&z=15&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+              aria-label="Bản đồ vị trí CH Văn Hoá Phẩm Phật Giáo TTH">
+            </iframe>
+          </div>
+          <div class="map-address">
+            <span>🏪</span>
+            <p><strong>CH Văn Hoá Phẩm Phật Giáo TTH</strong><br>210 Hà Huy Tập, Tp. Đà Nẵng<br>Số ĐKKD: 048089005611</p>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="contact-social-card">
+          <h3 data-i18n="contactSocialTitle">🌐 Kết nối với chúng tôi</h3>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <span class="social-icon">📘</span> Facebook
+            </a>
+            <a href="#" class="social-link">
+              <span class="social-icon">📺</span> YouTube
+            </a>
+            <a href="#" class="social-link">
+              <span class="social-icon">💬</span> Zalo
+            </a>
+            <a href="tel:0888633133" class="social-link">
+              <span class="social-icon">📞</span> <span data-i18n="contactCallNow">Gọi ngay</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-grid">
+        <div class="footer-column footer-contact">
+          <h3>LIÊN HỆ</h3>
+          <div class="footer-box">
+            <p><strong>CH Văn Hoá Phẩm Phật Giáo TTH</strong></p>
+            <p>Địa chỉ: 210 Hà Huy Tập, Tp Đà Nẵng</p>
+            <p>Điện thoại: 0888633133</p>
+            <p>Email: TTHGroup@gmail.com</p>
+            <p>Số ĐKKD: 048089005611</p>
+          </div>
+        </div>
+        <div class="footer-column footer-policies">
+          <h3>CHÍNH SÁCH &amp; QUY ĐỊNH</h3>
+          <div class="footer-box">
+            <ul class="footer-list">
+              <li><a href="#">Hình thức thanh toán</a></li>
+              <li><a href="#">Chính sách vận chuyển</a></li>
+              <li><a href="#">Chính sách đổi trả</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-column footer-guides">
+          <h3>HƯỚNG DẪN</h3>
+          <div class="footer-box">
+            <ul class="footer-list">
+              <li><a href="#">Hướng dẫn mua hàng</a></li>
+              <li><a href="#">Câu hỏi thường gặp</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© Buddha Weekly. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>
