@@ -3,8 +3,20 @@
 
 const RESEND_API_KEY = 're_ctAiKKk8_ENVmMkRQFrzwPWb8SHJL26Dy';
 const RESEND_API_URL = 'https://api.resend.com/emails';
-const FROM_EMAIL = 'noreply@matongviet.com'; // Update this after domain verification
+const FROM_EMAIL = 'noreply@resend.dev'; // Using Resend's default domain for testing
 const FROM_NAME = 'Mật Tông Việt';
+
+/**
+ * Escape HTML characters
+ */
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
 /**
  * Resend Email Service
@@ -20,6 +32,7 @@ class ResendEmailService {
    */
   static async sendEmail(to, subject, html) {
     try {
+      console.log(`📧 Sending email to: ${to}`);
       const response = await fetch(RESEND_API_URL, {
         method: 'POST',
         headers: {
@@ -37,13 +50,14 @@ class ResendEmailService {
       const data = await response.json();
 
       if (!response.ok) {
-        console.error('Resend error:', data);
+        console.error('❌ Resend error:', data);
         return { data: null, error: data };
       }
 
+      console.log('✅ Email sent successfully:', data);
       return { data: data, error: null };
     } catch (err) {
-      console.error('Email send error:', err);
+      console.error('❌ Email send error:', err);
       return { data: null, error: err };
     }
   }
