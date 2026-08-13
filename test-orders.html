@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Orders Table - Mat Tong Viet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #d97706;
+      padding-bottom: 10px;
+    }
+    .test-button {
+      display: inline-block;
+      margin: 10px 10px 10px 0;
+      padding: 10px 20px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .test-button:hover {
+      background: #2563eb;
+    }
+    .test-button.warning {
+      background: #f59e0b;
+    }
+    .test-button.warning:hover {
+      background: #d97706;
+    }
+    #status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+      font-weight: bold;
+    }
+    #status.success {
+      background: #d1fae5;
+      color: #065f46;
+      border-left: 4px solid #10b981;
+      display: block;
+    }
+    #status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 4px solid #ef4444;
+      display: block;
+    }
+    #results {
+      margin-top: 20px;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 3px;
+    }
+    .info-box strong {
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Test Orders Table - Mat Tong Viet</h1>
+    
+    <div class="info-box">
+      <strong>Purpose:</strong> Test if the 'orders' table exists in Supabase and check RLS policies
+    </div>
+
+    <div>
+      <button class="test-button" onclick="checkOrdersTable()">📋 Check Orders Table</button>
+      <button class="test-button" onclick="queryOrders()">📊 Query Orders Data</button>
+      <button class="test-button warning" onclick="testInsertOrder()">✏️ Test Insert Order</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="results"></div>
+  </div>
+
+  <script src="supabase-client.js"></script>
+  <script src="supabase-config.js"></script>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const resultsEl = document.getElementById('results');
+
+    function showStatus(message, isError = false) {
+      statusEl.textContent = message;
+      statusEl.className = isError ? 'error' : 'success';
+    }
+
+    function showResults(data) {
+      resultsEl.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function checkOrdersTable() {
+      try {
+        showStatus('⏳ Checking orders table structure...');
+        resultsEl.textContent = '';
+
+        // Try to fetch orders to check if table exists
+        const url = `${SUPABASE_URL}/rest/v1/orders?select=*&limit=1`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.status === 404) {
+          showStatus('❌ Orders table NOT found in Supabase', true);
+          showResults({ error: 'Table does not exist' });
+          return;
+        }
+
+        if (!response.ok && response.status !== 200) {
+          const error = await response.json();
+          showStatus(`❌ Error checking table: ${error.message || response.statusText}`, true);
+          showResults(error);
+          return;
+        }
+
+        showStatus('✅ Orders table EXISTS in Supabase');
+        
+        // Get table schema info
+        const schemaUrl = `${SUPABASE_URL}/rest/v1/information_schema.columns?table_name=eq.orders&select=column_name,data_type,is_nullable`;
+        const schemaResponse = await fetch(schemaUrl, {
+          method: 'GET',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (schemaResponse.ok) {
+          const schema = await schemaResponse.json();
+          showResults({
+            status: 'Orders table found',
+            columns: schema,
+            message: 'See columns above. Check that INSERT policy exists for anon role.'
+          });
+        } else {
+          showResults({ 
+            status: 'Orders table found',
+            message: 'Could not fetch column details, but table exists'
+          });
+        }
+      } catch (error) {
+        showStatus(`❌ Error: ${error.message}`, true);
+        showResults(error);
+      }
+    }
+
+    async function queryOrders() {
+      try {
+        showStatus('⏳ Querying orders data...');
+        resultsEl.textContent = '';
+
+        // Use REST API directly since our local client wrapper only supports insert()
+        const url = `${SUPABASE_URL}/rest/v1/orders?select=*&order=created_at.desc&limit=10`;
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          showStatus(`❌ Query error: ${error.message || response.statusText}`, true);
+          showResults(error);
+          return;
+        }
+
+        const data = await response.json();
+
+        if (!data || data.length === 0) {
+          showStatus('✅ Orders table is empty (no records yet)');
+          showResults({ message: 'Table exists but no records', count: 0 });
+        } else {
+          showStatus(`✅ Found ${data.length} orders`);
+          showResults(data);
+        }
+      } catch (error) {
+        showStatus(`❌ Error: ${error.message}`, true);
+        showResults(error);
+      }
+    }
+
+    async function testInsertOrder() {
+      try {
+        if (!confirm('This will insert a TEST order record. Continue?')) return;
+
+        showStatus('⏳ Attempting to insert test order...');
+        resultsEl.textContent = '';
+
+        const testOrder = {
+          order_id: 'TEST-' + Date.now(),
+          fullname: 'Test Customer',
+          email: 'test@example.com',
+          phone: '0123456789',
+          address: '123 Test Street',
+          city: 'Test City',
+          district: null,
+          note: 'This is a test order',
+          payment_method: 'cod',
+          items_json: JSON.stringify([{ id: 1, name: 'Test Item', price: 100000, qty: 1 }]),
+          total_amount: 100000,
+          status: 'pending',
+          created_at: new Date().toISOString()
+        };
+
+        const { data, error } = await supabaseClient
+          .from('orders')
+          .insert([testOrder]);
+
+        if (error) {
+          showStatus(`❌ Insert failed: ${error.message}`, true);
+          showResults({
+            error: error.message,
+            details: error,
+            solution: 'Possible causes:\n1. RLS policy does not allow INSERT for anon role\n2. Column names mismatch\n3. Column type mismatch'
+          });
+          return;
+        }
+
+        showStatus('✅ Test order inserted successfully!');
+        showResults({
+          success: true,
+          data: data,
+          message: 'Order was inserted. Check Supabase dashboard for confirmation.'
+        });
+      } catch (error) {
+        showStatus(`❌ Error: ${error.message}`, true);
+        showResults(error);
+      }
+    }
+  </script>
+</body>
+</html>
