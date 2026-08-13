@@ -1098,6 +1098,20 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
     downloadModal.classList.add('active');
   });
 
+  // Handle download-trigger cards on download.html
+  document.querySelectorAll('.download-trigger').forEach(card => {
+    card.addEventListener('click', (event) => {
+      event.preventDefault();
+      const docName = card.dataset.documentName || 'Không xác định';
+      window._currentDownloadDocument = docName;
+      if (downloadModal) {
+        downloadModal.classList.add('active');
+        downloadResponse.textContent = '';
+        downloadForm.reset();
+      }
+    });
+  });
+
   downloadClose?.addEventListener('click', closeDownload);
   cancelDownload?.addEventListener('click', closeDownload);
 
@@ -1151,7 +1165,7 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
     }
   });
 
-  downloadForm?.addEventListener('submit', (event) => {
+  downloadForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(downloadForm);
     const name = sanitizeText(formData.get('name')?.toString() || '', 80);
@@ -1163,10 +1177,42 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
       return;
     }
 
-    downloadResponse.textContent = 'Tài liệu sẽ được gửi tới email của bạn ngay khi có thể.';
-    downloadForm.reset();
+    // Show processing
+    downloadResponse.textContent = 'Đang xử lý...';
 
-    setTimeout(closeDownload, 2200);
+    try {
+      // Get current download document name
+      const currentDownloadDocument = window._currentDownloadDocument || 'Không xác định';
+
+      // Prepare download data
+      const downloadData = {
+        name: name,
+        email: email,
+        phone: phone,
+        document_name: currentDownloadDocument
+      };
+
+      // Call Supabase to insert download record
+      const { data, error } = await supabaseClient
+        .from('downloads')
+        .insert([downloadData]);
+
+      if (error) {
+        console.error('Lỗi Supabase:', error);
+        downloadResponse.textContent = `Có lỗi xảy ra: ${error.message}. Vui lòng thử lại sau.`;
+        return;
+      }
+
+      // Only show success message after Supabase insert succeeds
+      downloadResponse.textContent = 'Tài liệu sẽ được gửi tới email của bạn ngay khi có thể.';
+      downloadForm.reset();
+
+      setTimeout(closeDownload, 2200);
+
+    } catch (err) {
+      console.error('Lỗi khi xử lý tải tài liệu:', err);
+      downloadResponse.textContent = 'Có lỗi xảy ra. Vui lòng kiểm tra kết nối internet và thử lại.';
+    }
   });
 
   if (downloadModal && window.location.pathname.endsWith('download.html')) {
