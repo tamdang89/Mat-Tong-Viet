@@ -1399,7 +1399,6 @@ if (orderForm) {
     try {
       // Prepare order data - match actual Supabase columns
       const orderData = {
-        order_id: newOrderId,
         order_code: newOrderId,
         fullname: fullname,
         email: email,
@@ -1409,9 +1408,7 @@ if (orderForm) {
         district: district || '',
         note: note || '',
         payment_method: payment || 'cod',
-        items_json: JSON.stringify(cart),
-        total_amount: total,
-        status: 'pending'
+        total_amount: total
       };
 
       // Call Supabase to insert order

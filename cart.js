@@ -306,7 +306,6 @@ async function handleOrder(e) {
   try {
     // Prepare order data - match actual Supabase columns
     const orderData = {
-      order_id: orderId,
       order_code: orderId,
       fullname: data.fullname,
       email: data.email,
@@ -316,9 +315,7 @@ async function handleOrder(e) {
       district: data.district || '',
       note: data.note || '',
       payment_method: data.payment || 'cod',
-      items_json: JSON.stringify(cart),
-      total_amount: total,
-      status: 'pending'
+      total_amount: total
     };
 
     // Call Supabase to insert order
