@@ -1105,7 +1105,7 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
     if (event.target === downloadModal) closeDownload();
   });
 
-  signupForm?.addEventListener('submit', (event) => {
+  signupForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const formData = new FormData(signupForm);
     const name = sanitizeText(formData.get('name')?.toString() || '', 80);
@@ -1117,10 +1117,38 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
       return;
     }
 
-    signupResponse.textContent = 'Cảm ơn! Yêu cầu đăng ký của bạn đã được ghi nhận.';
-    signupForm.reset();
+    // Hiển thị thông báo đang xử lý
+    signupResponse.textContent = 'Đang xử lý...';
 
-    setTimeout(closeSignup, 2200);
+    try {
+      // Thực sự gọi Supabase để insert dữ liệu vào bảng signups
+      const { data, error } = await supabaseClient
+        .from('signups')
+        .insert([
+          {
+            name: name,
+            email: email,
+            phone: phone,
+            created_at: new Date().toISOString()
+          }
+        ]);
+
+      if (error) {
+        console.error('Lỗi Supabase:', error);
+        signupResponse.textContent = `Có lỗi xảy ra: ${error.message}. Vui lòng thử lại sau.`;
+        return;
+      }
+
+      // Chỉ hiển thị thông báo thành công SAU KHI insert thành công
+      signupResponse.textContent = 'Cảm ơn! Yêu cầu đăng ký của bạn đã được ghi nhận.';
+      signupForm.reset();
+
+      // Đóng modal sau 2.2 giây
+      setTimeout(closeSignup, 2200);
+    } catch (err) {
+      console.error('Lỗi khi gửi dữ liệu:', err);
+      signupResponse.textContent = 'Có lỗi xảy ra. Vui lòng kiểm tra kết nối internet và thử lại.';
+    }
   });
 
   downloadForm?.addEventListener('submit', (event) => {

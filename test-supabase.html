@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Supabase Connection - Mat Tong Viet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .section {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f8f9fa;
+      border-left: 4px solid #007bff;
+      border-radius: 4px;
+    }
+    .status {
+      padding: 10px 15px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    tr:hover {
+      background: #f0f0f0;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Test Supabase Connection</h1>
+    
+    <div class="section">
+      <h2>🔍 Kiểm Tra Kết Nối Supabase</h2>
+      <button onclick="checkConnection()">✓ Kiểm tra kết nối</button>
+      <button onclick="querySignups()">📊 Xem dữ liệu signups</button>
+      <button onclick="testInsert()">➕ Test insert dữ liệu</button>
+    </div>
+
+    <div id="status" class="section" style="display:none;"></div>
+    <div id="results" class="section" style="display:none;"></div>
+  </div>
+
+  <script src="supabase-client.js"></script>
+  <script src="supabase-config.js"></script>
+  
+  <script>
+    // Use the config from supabase-config.js
+    // SUPABASE_URL and SUPABASE_ANON_KEY should be already defined
+
+    function showStatus(message, type = 'info') {
+      const statusEl = document.getElementById('status');
+      statusEl.className = `section ${type}`;
+      statusEl.innerHTML = `<strong>${message}</strong>`;
+      statusEl.style.display = 'block';
+    }
+
+    function showResults(title, content) {
+      const resultsEl = document.getElementById('results');
+      resultsEl.style.display = 'block';
+      resultsEl.innerHTML = `<h3>${title}</h3><pre>${typeof content === 'string' ? content : JSON.stringify(content, null, 2)}</pre>`;
+    }
+
+    async function checkConnection() {
+      showStatus('Đang kiểm tra kết nối...', 'info');
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/`, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+        
+        if (response.ok) {
+          showStatus('✅ Kết nối Supabase thành công!', 'success');
+          showResults('Kết nối:', `URL: ${SUPABASE_URL}\nStatus: ${response.status} ${response.statusText}`);
+        } else {
+          showStatus(`❌ Kết nối thất bại: ${response.status} ${response.statusText}`, 'error');
+        }
+      } catch (err) {
+        showStatus(`❌ Lỗi kết nối: ${err.message}`, 'error');
+      }
+    }
+
+    async function querySignups() {
+      showStatus('Đang truy vấn bảng signups...', 'info');
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/signups?select=*&order=created_at.desc&limit=20`,
+          {
+            method: 'GET',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        if (!response.ok) {
+          const error = await response.text();
+          showStatus(`❌ Truy vấn thất bại: ${response.status}`, 'error');
+          showResults('Lỗi:', error);
+          return;
+        }
+
+        const data = await response.json();
+        
+        if (Array.isArray(data) && data.length > 0) {
+          showStatus(`✅ Tìm thấy ${data.length} bản ghi trong bảng signups!`, 'success');
+          
+          let tableHtml = '<h3>📋 Dữ liệu trong bảng signups:</h3>';
+          tableHtml += '<table><tr><th>ID</th><th>Tên</th><th>Email</th><th>Điện thoại</th><th>Ngày tạo</th></tr>';
+          
+          data.forEach(row => {
+            const date = new Date(row.created_at).toLocaleString('vi-VN');
+            tableHtml += `<tr><td>${row.id}</td><td>${row.name}</td><td>${row.email}</td><td>${row.phone}</td><td>${date}</td></tr>`;
+          });
+          
+          tableHtml += '</table>';
+          document.getElementById('results').innerHTML = tableHtml;
+          document.getElementById('results').style.display = 'block';
+        } else {
+          showStatus('❌ Bảng signups trống - không tìm thấy dữ liệu', 'error');
+          showResults('Kết quả:', data);
+        }
+      } catch (err) {
+        showStatus(`❌ Lỗi: ${err.message}`, 'error');
+      }
+    }
+
+    async function testInsert() {
+      showStatus('Đang test insert dữ liệu...', 'info');
+      const testData = {
+        name: 'Test Admin - ' + new Date().toLocaleTimeString(),
+        email: 'test-' + Date.now() + '@example.com',
+        phone: '0999999999',
+        created_at: new Date().toISOString()
+      };
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/signups`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify([testData])
+        });
+
+        if (!response.ok) {
+          const error = await response.text();
+          showStatus(`❌ Insert thất bại: ${response.status} ${response.statusText}`, 'error');
+          showResults('Lỗi:', error);
+          return;
+        }
+
+        const result = await response.json();
+        showStatus('✅ Insert dữ liệu test thành công!', 'success');
+        showResults('Dữ liệu được insert:', result);
+      } catch (err) {
+        showStatus(`❌ Lỗi: ${err.message}`, 'error');
+      }
+    }
+
+    // Auto check on load
+    window.addEventListener('load', () => {
+      setTimeout(checkConnection, 500);
+    });
+  </script>
+</body>
+</html>
