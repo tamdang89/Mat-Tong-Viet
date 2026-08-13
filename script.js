@@ -1209,3 +1209,126 @@ if (contactForm) {
 
   contactReset?.addEventListener('click', () => contactForm.reset());
 }
+
+/* Order form handling (checkout page) */
+const orderForm = document.getElementById('orderForm');
+const placeOrderBtn = document.getElementById('placeOrderBtn');
+const orderSuccess = document.getElementById('orderSuccess');
+const orderId = document.getElementById('orderId');
+const successDetails = document.getElementById('successDetails');
+const checkoutForm = document.getElementById('checkoutForm');
+
+if (orderForm) {
+  orderForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(orderForm);
+    
+    // Collect order data
+    const fullname = sanitizeText(formData.get('fullname') || '', 100);
+    const email = sanitizeText(formData.get('email') || '', 120);
+    const phone = sanitizeText(formData.get('phone') || '', 20);
+    const address = sanitizeText(formData.get('address') || '', 200);
+    const city = sanitizeText(formData.get('city') || '', 50);
+    const district = sanitizeText(formData.get('district') || '', 50);
+    const note = sanitizeText(formData.get('note') || '', 500);
+    const payment = formData.get('payment') || 'cod';
+
+    // Validate
+    if (!fullname || fullname.length < 2 || !isValidEmail(email) || !isValidPhone(phone) || !address || !city) {
+      if (placeOrderBtn) placeOrderBtn.textContent = 'Lỗi: Vui lòng điền đầy đủ thông tin bắt buộc';
+      setTimeout(() => { placeOrderBtn.textContent = '✅ Đặt hàng'; }, 2000);
+      return;
+    }
+
+    // Get cart
+    const cart = getCart();
+    if (!cart || cart.length === 0) {
+      if (placeOrderBtn) placeOrderBtn.textContent = 'Lỗi: Giỏ hàng trống';
+      setTimeout(() => { placeOrderBtn.textContent = '✅ Đặt hàng'; }, 2000);
+      return;
+    }
+
+    // Calculate total
+    const total = getCartTotal();
+
+    // Generate order ID
+    const newOrderId = generateOrderId();
+
+    // Show processing message
+    if (placeOrderBtn) placeOrderBtn.textContent = 'Đang xử lý đơn hàng...';
+    if (placeOrderBtn) placeOrderBtn.disabled = true;
+
+    try {
+      // Prepare order data
+      const orderData = {
+        order_id: newOrderId,
+        fullname: fullname,
+        email: email,
+        phone: phone,
+        address: address,
+        city: city,
+        district: district || null,
+        note: note || null,
+        payment_method: payment,
+        items_json: JSON.stringify(cart),
+        total_amount: total,
+        status: 'pending',
+        created_at: new Date().toISOString()
+      };
+
+      // Call Supabase to insert order
+      const { data, error } = await supabaseClient
+        .from('orders')
+        .insert([orderData]);
+
+      if (error) {
+        console.error('Lỗi Supabase:', error);
+        if (placeOrderBtn) placeOrderBtn.textContent = `❌ Lỗi: ${error.message}`;
+        if (placeOrderBtn) placeOrderBtn.disabled = false;
+        setTimeout(() => { 
+          if (placeOrderBtn) placeOrderBtn.textContent = '✅ Đặt hàng'; 
+        }, 3000);
+        return;
+      }
+
+      // Order successfully inserted - show success page
+      if (checkoutForm) checkoutForm.style.display = 'none';
+      if (orderSuccess) orderSuccess.style.display = 'block';
+      
+      if (orderId) orderId.textContent = newOrderId;
+      
+      // Build success details
+      if (successDetails) {
+        let detailsHtml = '<div class="success-order-details">';
+        detailsHtml += '<p><strong>Thông tin giao hàng:</strong></p>';
+        detailsHtml += `<p>${fullname} | ${phone} | ${email}</p>`;
+        detailsHtml += `<p>${address}, ${district ? district + ', ' : ''}${city}</p>`;
+        if (note) detailsHtml += `<p><em>Ghi chú: ${escapeHtml(note)}</em></p>`;
+        detailsHtml += '<p style="margin-top: 15px;"><strong>Phương thức thanh toán:</strong></p>';
+        const paymentLabel = payment === 'cod' ? 'Thanh toán khi nhận hàng (COD)' : 
+                            payment === 'bank' ? 'Chuyển khoản ngân hàng' : 'Ví MoMo / ZaloPay';
+        detailsHtml += `<p>${paymentLabel}</p>`;
+        detailsHtml += '<p style="margin-top: 15px;"><strong>Tổng tiền:</strong></p>';
+        detailsHtml += `<p style="font-size: 18px; color: #d97706;">${formatVND(total)}</p>`;
+        detailsHtml += '</div>';
+        successDetails.innerHTML = detailsHtml;
+      }
+
+      // Clear cart
+      clearCart();
+
+      // Redirect after 5 seconds
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 5000);
+
+    } catch (err) {
+      console.error('Lỗi khi xử lý đơn hàng:', err);
+      if (placeOrderBtn) placeOrderBtn.textContent = '❌ Lỗi: Không thể xử lý đơn hàng';
+      if (placeOrderBtn) placeOrderBtn.disabled = false;
+      setTimeout(() => { 
+        if (placeOrderBtn) placeOrderBtn.textContent = '✅ Đặt hàng'; 
+      }, 3000);
+    }
+  });
+}
