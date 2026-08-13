@@ -309,7 +309,12 @@ async function handleOrder(e) {
       order_code: orderId,
       fullname: data.fullname,
       email: data.email,
-      phone: data.phone
+      phone: data.phone,
+      address: data.address || '',
+      city: data.city || '',
+      district: data.district || '',
+      note: data.note || '',
+      payment_method: data.payment || 'cod'
     };
 
     // Call Supabase to insert order
