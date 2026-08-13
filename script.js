@@ -1259,21 +1259,12 @@ if (orderForm) {
     if (placeOrderBtn) placeOrderBtn.disabled = true;
 
     try {
-      // Prepare order data
+      // Prepare order data - match actual Supabase columns
       const orderData = {
-        order_id: newOrderId,
+        order_code: newOrderId,
         fullname: fullname,
         email: email,
-        phone: phone,
-        address: address,
-        city: city,
-        district: district || null,
-        note: note || null,
-        payment_method: payment,
-        items_json: JSON.stringify(cart),
-        total_amount: total,
-        status: 'pending',
-        created_at: new Date().toISOString()
+        phone: phone
       };
 
       // Call Supabase to insert order
