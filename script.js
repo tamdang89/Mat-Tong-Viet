@@ -1399,10 +1399,19 @@ if (orderForm) {
     try {
       // Prepare order data - match actual Supabase columns
       const orderData = {
+        order_id: newOrderId,
         order_code: newOrderId,
         fullname: fullname,
         email: email,
-        phone: phone
+        phone: phone,
+        address: address || '',
+        city: city || '',
+        district: district || '',
+        note: note || '',
+        payment_method: payment || 'cod',
+        items_json: JSON.stringify(cart),
+        total_amount: total,
+        status: 'pending'
       };
 
       // Call Supabase to insert order
@@ -1418,6 +1427,37 @@ if (orderForm) {
           if (placeOrderBtn) placeOrderBtn.textContent = '✅ Đặt hàng'; 
         }, 3000);
         return;
+      }
+
+      try {
+        const emailResponse = await fetch('/api/send-order-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            order_id: newOrderId,
+            order_code: newOrderId,
+            fullname,
+            email,
+            phone,
+            address,
+            city,
+            district,
+            note,
+            payment_method: payment || 'cod',
+            total_amount: total,
+            items_json: JSON.stringify(cart),
+            recipient_email: 'tamdang.digital@gmail.com'
+          })
+        });
+
+        const emailResult = await emailResponse.json().catch(() => ({}));
+        if (!emailResponse.ok) {
+          console.warn('⚠️ Failed to send order email via API route:', emailResult);
+        } else {
+          console.log('✅ Order notification email request accepted:', emailResult);
+        }
+      } catch (emailError) {
+        console.warn('⚠️ Order email request failed:', emailError);
       }
 
       // Order successfully inserted - show success page

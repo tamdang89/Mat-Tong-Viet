@@ -306,6 +306,7 @@ async function handleOrder(e) {
   try {
     // Prepare order data - match actual Supabase columns
     const orderData = {
+      order_id: orderId,
       order_code: orderId,
       fullname: data.fullname,
       email: data.email,
@@ -314,7 +315,10 @@ async function handleOrder(e) {
       city: data.city || '',
       district: data.district || '',
       note: data.note || '',
-      payment_method: data.payment || 'cod'
+      payment_method: data.payment || 'cod',
+      items_json: JSON.stringify(cart),
+      total_amount: total,
+      status: 'pending'
     };
 
     // Call Supabase to insert order
@@ -334,38 +338,36 @@ async function handleOrder(e) {
       return;
     }
 
-    // Order successfully inserted - send confirmation email
-    console.log('📧 Order saved to Supabase, attempting to send email...');
-    console.log('ResendEmailService available?', !!window.ResendEmailService);
-    
-    const emailTemplate = window.ResendEmailService?.getOrderConfirmationTemplate({
-      order_code: orderId,
-      fullname: data.fullname,
-      email: data.email,
-      phone: data.phone,
-      address: data.address,
-      city: data.city,
-      district: data.district || '',
-      note: data.note || '',
-      payment_method: data.payment || 'cod'
-    });
-
-    console.log('Email template generated?', !!emailTemplate);
-
-    if (window.ResendEmailService && emailTemplate) {
-      console.log(`📧 Sending email to: ${data.email}`);
-      await window.ResendEmailService.sendEmail(
-        data.email,
-        `✅ Xác nhận đơn hàng #${orderId} - Mật Tông Việt`,
-        emailTemplate
-      ).catch(err => {
-        console.warn('⚠️ Email send warning:', err);
-        // Continue even if email fails - order is already saved
+    // Order successfully inserted - notify admin via serverless API
+    try {
+      const emailResponse = await fetch('/api/send-order-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          order_id: orderId,
+          order_code: orderId,
+          fullname: data.fullname,
+          email: data.email,
+          phone: data.phone,
+          address: data.address || '',
+          city: data.city || '',
+          district: data.district || '',
+          note: data.note || '',
+          payment_method: data.payment || 'cod',
+          total_amount: total,
+          items_json: JSON.stringify(cart),
+          recipient_email: 'tamdang.digital@gmail.com'
+        })
       });
-    } else {
-      console.warn('⚠️ Email service not available or template not generated');
-      if (!window.ResendEmailService) console.warn('  - ResendEmailService not loaded');
-      if (!emailTemplate) console.warn('  - Email template generation failed');
+
+      const emailResult = await emailResponse.json().catch(() => ({}));
+      if (!emailResponse.ok) {
+        console.warn('⚠️ Failed to send order email via API route:', emailResult);
+      } else {
+        console.log('✅ Order notification email request accepted:', emailResult);
+      }
+    } catch (emailError) {
+      console.warn('⚠️ Order email request failed:', emailError);
     }
 
     // Show success page
