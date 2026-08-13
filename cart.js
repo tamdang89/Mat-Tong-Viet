@@ -335,6 +335,9 @@ async function handleOrder(e) {
     }
 
     // Order successfully inserted - send confirmation email
+    console.log('📧 Order saved to Supabase, attempting to send email...');
+    console.log('ResendEmailService available?', !!window.ResendEmailService);
+    
     const emailTemplate = window.ResendEmailService?.getOrderConfirmationTemplate({
       order_code: orderId,
       fullname: data.fullname,
@@ -347,15 +350,22 @@ async function handleOrder(e) {
       payment_method: data.payment || 'cod'
     });
 
+    console.log('Email template generated?', !!emailTemplate);
+
     if (window.ResendEmailService && emailTemplate) {
+      console.log(`📧 Sending email to: ${data.email}`);
       await window.ResendEmailService.sendEmail(
         data.email,
         `✅ Xác nhận đơn hàng #${orderId} - Mật Tông Việt`,
         emailTemplate
       ).catch(err => {
-        console.warn('Email send warning:', err);
+        console.warn('⚠️ Email send warning:', err);
         // Continue even if email fails - order is already saved
       });
+    } else {
+      console.warn('⚠️ Email service not available or template not generated');
+      if (!window.ResendEmailService) console.warn('  - ResendEmailService not loaded');
+      if (!emailTemplate) console.warn('  - Email template generation failed');
     }
 
     // Show success page
