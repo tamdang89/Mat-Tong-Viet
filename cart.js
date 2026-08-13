@@ -334,7 +334,31 @@ async function handleOrder(e) {
       return;
     }
 
-    // Order successfully inserted - show success page
+    // Order successfully inserted - send confirmation email
+    const emailTemplate = window.ResendEmailService?.getOrderConfirmationTemplate({
+      order_code: orderId,
+      fullname: data.fullname,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      city: data.city,
+      district: data.district || '',
+      note: data.note || '',
+      payment_method: data.payment || 'cod'
+    });
+
+    if (window.ResendEmailService && emailTemplate) {
+      await window.ResendEmailService.sendEmail(
+        data.email,
+        `✅ Xác nhận đơn hàng #${orderId} - Mật Tông Việt`,
+        emailTemplate
+      ).catch(err => {
+        console.warn('Email send warning:', err);
+        // Continue even if email fails - order is already saved
+      });
+    }
+
+    // Show success page
     document.getElementById('checkoutForm').style.display = 'none';
     const steps = document.querySelector('.checkout-steps');
     if (steps) {

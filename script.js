@@ -1203,6 +1203,24 @@ fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
         return;
       }
 
+      // Send confirmation email
+      const emailTemplate = window.ResendEmailService?.getDownloadConfirmationTemplate({
+        name: name,
+        email: email,
+        document_name: currentDownloadDocument
+      });
+
+      if (window.ResendEmailService && emailTemplate) {
+        await window.ResendEmailService.sendEmail(
+          email,
+          `📥 Xác nhận tải tài liệu - ${currentDownloadDocument} | Mật Tông Việt`,
+          emailTemplate
+        ).catch(err => {
+          console.warn('Email send warning:', err);
+          // Continue even if email fails
+        });
+      }
+
       // Only show success message after Supabase insert succeeds
       downloadResponse.textContent = 'Tài liệu sẽ được gửi tới email của bạn ngay khi có thể.';
       downloadForm.reset();
@@ -1280,6 +1298,25 @@ if (contactForm) {
         contactForm.style.opacity = '1';
         contactForm.style.pointerEvents = 'auto';
         return;
+      }
+
+      // Send confirmation email
+      const emailTemplate = window.ResendEmailService?.getContactConfirmationTemplate({
+        name: name,
+        email: email,
+        phone: phone,
+        subject: subject
+      });
+
+      if (window.ResendEmailService && emailTemplate) {
+        await window.ResendEmailService.sendEmail(
+          email,
+          `✉️ Xác nhận liên hệ - Mật Tông Việt`,
+          emailTemplate
+        ).catch(err => {
+          console.warn('Email send warning:', err);
+          // Continue even if email fails
+        });
       }
 
       // Success: hide form, show success message
