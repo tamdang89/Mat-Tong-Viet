@@ -99,96 +99,10 @@ const translations = {
     faqQuestion3: "Pháp tu phù hợp với người mới bắt đầu?",
     faqAnswer3: "Dạ vâng, có các pháp tu cơ bản nhẹ nhàng, hướng tới sự tỉnh thức và an nhiên cho người mới bắt đầu.",
     aboutTitle: "Giới thiệu",
-    aboutIntroText: `MẬT TÔNG VIỆT – KHI NGƯỜI MUỐN TÌM HIỂU CẦN MỘT NƠI ĐỂ BẮT ĐẦU
-
-Có thể bạn biết đến Mật tông từ một câu chú được nghe trong lúc lòng nhiều xáo động.
-
-Có thể bạn từng dừng lại trước một bức Thangka, một pho tượng, một chiếc Kim Cang Chử và tự hỏi:
-
-“Những hình ảnh này thực sự mang ý nghĩa gì?”
-
-Cũng có thể bạn đã thực hành một thời gian, nhưng càng tìm hiểu lại càng nhận ra mình đang đứng giữa quá nhiều luồng thông tin:
-
-Nơi thì trình bày Mật tông như một điều quá xa vời.
-
-Nơi lại nhấn mạnh vào sự linh nghiệm, quyền năng và những trải nghiệm khác thường.
-
-Còn những câu hỏi căn bản nhất đôi khi vẫn chưa được trả lời rõ ràng:
-
-Mật tông thực sự là gì?
-
-Người mới nên tìm hiểu từ đâu?
-
-Điều gì có thể học qua sách và bài viết?
-
-Điều gì cần sự hướng dẫn, truyền trao và cho phép từ một vị thầy đủ phẩm chất?
-
-Và quan trọng hơn: giáo pháp có thể đi vào gia đình, công việc và cách chúng ta đối diện với chính mình như thế nào?
-
-Đó là lý do website Mật Tông Việt được xây dựng.
-
-Không phải để biến Kim Cang thừa thành một thế giới bí ẩn nhằm thu hút sự tò mò.
-
-Không phải để hứa hẹn rằng một câu chú, một nghi lễ hay một vật phẩm có thể thay con người giải quyết mọi khó khăn.
-
-Cũng không phải để thay thế Đạo sư, truyền thừa và quá trình tu học nghiêm túc.
-
-Mật Tông Việt mong muốn trở thành một không gian giúp người Việt tiếp cận Phật giáo Mật tông bằng ba điều:
-
-Hiểu đúng hơn.
-Tìm hiểu có hệ thống hơn.
-Và biết rõ ranh giới trước khi bước sâu hơn.
-
-Trên website, chúng tôi đang từng bước xây dựng một hệ thống nội dung dành cho cả người mới tìm hiểu và người đã thực hành.
-
-Người mới có thể bắt đầu từ những câu hỏi nền tảng về nhân vật, truyền thừa, con đường tu học, chú ngữ, biểu tượng và pháp khí.
-
-Người đã có thời gian thực hành có thể cùng soi chiếu một câu hỏi sâu hơn:
-
-Sau những thời khóa, điều gì đã thực sự thay đổi trong lời nói, cảm xúc, trách nhiệm và cách ta đối xử với những người gần mình nhất?
-
-Bởi việc tu không chỉ được nhìn thấy khi ta ngồi trước bàn thờ.
-
-Nó còn hiện ra trong một bữa cơm gia đình, một lần bất đồng, một ngày công việc không thuận lợi hay khoảnh khắc ta có thể dừng lại trước khi làm người khác tổn thương.
-
-Website Mật Tông Việt được tổ chức thành những khu vực rõ ràng:
-
-– Blog chia sẻ kiến thức và giải đáp những băn khoăn thường gặp.
-– FAQ giúp người đọc bắt đầu từ những câu hỏi cụ thể.
-– Kho tài liệu dành cho quá trình tìm hiểu có hệ thống.
-– Nội dung song ngữ Việt – Anh để mở rộng khả năng tiếp cận và đối chiếu.
-– Không gian giới thiệu tượng, đồ thờ, pháp khí, tranh Thangka và các văn hóa phẩm Phật giáo.
-
-Với các vật phẩm, chúng tôi không chỉ muốn giới thiệu một món đồ đẹp.
-
-Mỗi hình tượng, pháp khí hay vật phẩm đều cần được tiếp cận bằng sự hiểu biết về ý nghĩa, hoàn cảnh sử dụng và giới hạn của nó — không thần bí hóa, không gán cho vật phẩm những lời hứa vượt quá giá trị chân thực.
-
-Cấu trúc đầu tiên của website đã hoàn thành.
-
-Nhưng đây chưa phải điểm kết thúc.
-
-Đây mới là nền móng để kho nội dung Mật Tông Việt được cập nhật từng bước theo một lộ trình nhất quán: từ kiến thức nền tảng đến con đường tu học, từ truyền thừa đến đời sống, từ biểu tượng và pháp khí đến những ứng dụng gần gũi với người Việt hôm nay.
-
-Chúng tôi không mong bạn tin ngay mọi điều mình đọc được.
-
-Chúng tôi mong bạn biết đặt câu hỏi, biết đối chiếu, nhận ra đâu là kiến thức phổ thông và đâu là phần cần tìm đến một vị thầy cùng truyền thừa chân chính.
-
-Nếu bạn là người mới, hy vọng website này giúp bạn bớt lạc giữa quá nhiều thông tin.
-
-Nếu bạn đã thực hành, hy vọng đây là nơi chúng ta có thể cùng nhìn lại những điều tưởng đã quen thuộc bằng một tâm thế cởi mở và tỉnh táo hơn.
-
-Và dù đang đứng ở đâu trên hành trình, mong rằng mỗi người khi rời khỏi một bài viết đều có thể mang theo không chỉ thêm một điều để biết, mà còn một điều để soi lại trong chính đời sống của mình.
-
-Mời bạn ghé thăm Mật Tông Việt tại:
-
-https://mattongviet.com
-
-Bạn đang muốn tìm hiểu điều gì đầu tiên về Mật tông?
-
-Hãy để lại câu hỏi. Biết đâu chính câu hỏi của bạn sẽ trở thành một trong những bài viết tiếp theo trên Mật Tông Việt.
-
-MẬT TÔNG VIỆT
-Trí tuệ soi đường – Từ bi dẫn lối.`,
+    aboutIntroTextShort: "Mật Tông Việt là nơi người muốn tìm hiểu Phật giáo Mật tông có thể bắt đầu từ những câu hỏi căn bản, với một cách tiếp cận đúng đắn, có hệ thống và tôn trọng truyền thừa. Tại đây, bạn sẽ được dẫn dắt từ biểu tượng, chú ngữ, pháp khí, con đường tu học cho đến cách giáo pháp đi vào đời sống hằng ngày.",
+    aboutIntroTextFull: `MẬT TÔNG VIỆT – KHI NGƯỜI MUỐN TÌM HIỂU CẦN MỘT NƠI ĐỂ BẮT ĐẦU. Có thể bạn biết đến Mật tông từ một câu chú được nghe trong lúc lòng nhiều xáo động. Có thể bạn từng dừng lại trước một bức Thangka, một pho tượng, một chiếc Kim Cang Chử và tự hỏi: “Những hình ảnh này thực sự mang ý nghĩa gì?” Cũng có thể bạn đã thực hành một thời gian, nhưng càng tìm hiểu lại càng nhận ra mình đang đứng giữa quá nhiều luồng thông tin. Nơi thì trình bày Mật tông như một điều quá xa vời. Nơi lại nhấn mạnh vào sự linh nghiệm, quyền năng và những trải nghiệm khác thường. Còn những câu hỏi căn bản nhất đôi khi vẫn chưa được trả lời rõ ràng: Mật tông thực sự là gì? Người mới nên tìm hiểu từ đâu? Điều gì có thể học qua sách và bài viết? Điều gì cần sự hướng dẫn, truyền trao và cho phép từ một vị thầy đủ phẩm chất? Và quan trọng hơn: giáo pháp có thể đi vào gia đình, công việc và cách chúng ta đối diện với chính mình như thế nào? Đó là lý do website Mật Tông Việt được xây dựng. Không phải để biến Kim Cang thừa thành một thế giới bí ẩn nhằm thu hút sự tò mò. Không phải để hứa hẹn rằng một câu chú, một nghi lễ hay một vật phẩm có thể thay con người giải quyết mọi khó khăn. Cũng không phải để thay thế Đạo sư, truyền thừa và quá trình tu học nghiêm túc. Mật Tông Việt mong muốn trở thành một không gian giúp người Việt tiếp cận Phật giáo Mật tông bằng ba điều: Hiểu đúng hơn. Tìm hiểu có hệ thống hơn. Và biết rõ ranh giới trước khi bước sâu hơn. Trên website, chúng tôi đang từng bước xây dựng một hệ thống nội dung dành cho cả người mới tìm hiểu và người đã thực hành. Người mới có thể bắt đầu từ những câu hỏi nền tảng về nhân vật, truyền thừa, con đường tu học, chú ngữ, biểu tượng và pháp khí. Người đã có thời gian thực hành có thể cùng soi chiếu một câu hỏi sâu hơn: Sau những thời khóa, điều gì đã thực sự thay đổi trong lời nói, cảm xúc, trách nhiệm và cách ta đối xử với những người gần mình nhất? Bởi việc tu không chỉ được nhìn thấy khi ta ngồi trước bàn thờ. Nó còn hiện ra trong một bữa cơm gia đình, một lần bất đồng, một ngày công việc không thuận lợi hay khoảnh khắc ta có thể dừng lại trước khi làm người khác tổn thương. Website Mật Tông Việt được tổ chức thành những khu vực rõ ràng: Blog chia sẻ kiến thức và giải đáp những băn khoăn thường gặp; FAQ giúp người đọc bắt đầu từ những câu hỏi cụ thể; Kho tài liệu dành cho quá trình tìm hiểu có hệ thống; Nội dung song ngữ Việt – Anh để mở rộng khả năng tiếp cận và đối chiếu; Không gian giới thiệu tượng, đồ thờ, pháp khí, tranh Thangka và các văn hóa phẩm Phật giáo. Với các vật phẩm, chúng tôi không chỉ muốn giới thiệu một món đồ đẹp. Mỗi hình tượng, pháp khí hay vật phẩm đều cần được tiếp cận bằng sự hiểu biết về ý nghĩa, hoàn cảnh sử dụng và giới hạn của nó — không thần bí hóa, không gán cho vật phẩm những lời hứa vượt quá giá trị chân thực. Cấu trúc đầu tiên của website đã hoàn thành. Nhưng đây chưa phải điểm kết thúc. Đây mới là nền móng để kho nội dung Mật Tông Việt được cập nhật từng bước theo một lộ trình nhất quán: từ kiến thức nền tảng đến con đường tu học, từ truyền thừa đến đời sống, từ biểu tượng và pháp khí đến những ứng dụng gần gũi với người Việt hôm nay. Chúng tôi không mong bạn tin ngay mọi điều mình đọc được. Chúng tôi mong bạn biết đặt câu hỏi, biết đối chiếu, nhận ra đâu là kiến thức phổ thông và đâu là phần cần tìm đến một vị thầy cùng truyền thừa chân chính. Nếu bạn là người mới, hy vọng website này giúp bạn bớt lạc giữa quá nhiều thông tin. Nếu bạn đã thực hành, hy vọng đây là nơi chúng ta có thể cùng nhìn lại những điều tưởng đã quen thuộc bằng một tâm thế cởi mở và tỉnh táo hơn. Và dù đang đứng ở đâu trên hành trình, mong rằng mỗi người khi rời khỏi một bài viết đều có thể mang theo không chỉ thêm một điều để biết, mà còn một điều để soi lại trong chính đời sống của mình. Mời bạn ghé thăm Mật Tông Việt tại https://mattongviet.com. Bạn đang muốn tìm hiểu điều gì đầu tiên về Mật tông? Hãy để lại câu hỏi. Biết đâu chính câu hỏi của bạn sẽ trở thành một trong những bài viết tiếp theo trên Mật Tông Việt. MẬT TÔNG VIỆT — Trí tuệ soi đường — Từ bi dẫn lối.`,
+    aboutToggleMore: "Khám phá thêm",
+    aboutToggleLess: "Thu gọn",
     aboutCard1Title: "Nền tảng tri thức",
     aboutCard1Text: "Hiểu Mật tông từ truyền thừa, nhân vật, chú ngữ, biểu tượng và các khái niệm căn bản trước khi đi sâu hơn.",
     aboutCard2Title: "Giáo lý và ranh giới",
@@ -760,6 +674,8 @@ const i18nElements = document.querySelectorAll("[data-i18n]");
 const switchPills = document.querySelectorAll(".pill");
 const mantraButton = document.getElementById("mantraButton");
 const mantraText = document.getElementById("mantraText");
+const aboutIntroFull = document.getElementById("aboutIntroFull");
+const aboutToggleButton = document.getElementById("toggleAboutIntro");
 // Restore previously chosen language from localStorage
 let currentLang = "vi";
 try {
@@ -792,6 +708,16 @@ function applyStaticFallbackTranslation(lang) {
   if (translatedPairs[currentTitle]) {
     document.title = translatedPairs[currentTitle];
   }
+}
+
+function updateAboutToggleLabel() {
+  if (!aboutToggleButton || !aboutIntroFull) return;
+  const isExpanded = !aboutIntroFull.hidden;
+  const label = isExpanded
+    ? (currentLang === 'vi' ? translations.vi.aboutToggleLess : translations.en.aboutToggleLess)
+    : (currentLang === 'vi' ? translations.vi.aboutToggleMore : translations.en.aboutToggleMore);
+  aboutToggleButton.textContent = label;
+  aboutToggleButton.setAttribute('aria-expanded', String(isExpanded));
 }
 
 function updateLanguage(lang) {
@@ -832,6 +758,7 @@ function updateLanguage(lang) {
   applyI18nText('[data-i18n-aria]', 'aria-label');
   applyI18nText('[data-i18n-title]', 'title');
   applyStaticFallbackTranslation(lang);
+  updateAboutToggleLabel();
 
   applyProductCatalogLanguage(lang);
   if (mantraText) mantraText.textContent = "";
@@ -855,6 +782,14 @@ switchPills.forEach(pill => {
     });
   });
 });
+
+if (aboutIntroFull && aboutToggleButton) {
+  aboutIntroFull.hidden = true;
+  aboutToggleButton.addEventListener('click', () => {
+    aboutIntroFull.hidden = !aboutIntroFull.hidden;
+    updateAboutToggleLabel();
+  });
+}
 
 if (mantraButton) {
   mantraButton.addEventListener("click", () => {
