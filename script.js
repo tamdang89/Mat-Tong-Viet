@@ -99,13 +99,102 @@ const translations = {
     faqQuestion3: "Pháp tu phù hợp với người mới bắt đầu?",
     faqAnswer3: "Dạ vâng, có các pháp tu cơ bản nhẹ nhàng, hướng tới sự tỉnh thức và an nhiên cho người mới bắt đầu.",
     aboutTitle: "Giới thiệu",
-    aboutIntroText: "Trang web này là không gian Phật giáo Mật tông song ngữ, tập trung vào thực hành, giáo lý và nội dung tương tác giúp tâm an.",
-    aboutCard1Title: "Cội nguồn",
-    aboutCard1Text: "Mật tông là truyền thống Phật giáo Đại thừa, tập trung vào thiền định, chú nguyện và pháp khí.",
-    aboutCard2Title: "Giáo lý",
-    aboutCard2Text: "Nội quán, nhận diện tâm, và khai mở trí tuệ qua thực hành tâm linh.",
-    aboutCard3Title: "Thực hành",
-    aboutCard3Text: "Từ trì chú đến quán tưởng hình tượng, hỗ trợ người tu vượt nghịch cảnh bằng tâm tỉnh thức.",
+    aboutIntroText: `MẬT TÔNG VIỆT – KHI NGƯỜI MUỐN TÌM HIỂU CẦN MỘT NƠI ĐỂ BẮT ĐẦU
+
+Có thể bạn biết đến Mật tông từ một câu chú được nghe trong lúc lòng nhiều xáo động.
+
+Có thể bạn từng dừng lại trước một bức Thangka, một pho tượng, một chiếc Kim Cang Chử và tự hỏi:
+
+“Những hình ảnh này thực sự mang ý nghĩa gì?”
+
+Cũng có thể bạn đã thực hành một thời gian, nhưng càng tìm hiểu lại càng nhận ra mình đang đứng giữa quá nhiều luồng thông tin:
+
+Nơi thì trình bày Mật tông như một điều quá xa vời.
+
+Nơi lại nhấn mạnh vào sự linh nghiệm, quyền năng và những trải nghiệm khác thường.
+
+Còn những câu hỏi căn bản nhất đôi khi vẫn chưa được trả lời rõ ràng:
+
+Mật tông thực sự là gì?
+
+Người mới nên tìm hiểu từ đâu?
+
+Điều gì có thể học qua sách và bài viết?
+
+Điều gì cần sự hướng dẫn, truyền trao và cho phép từ một vị thầy đủ phẩm chất?
+
+Và quan trọng hơn: giáo pháp có thể đi vào gia đình, công việc và cách chúng ta đối diện với chính mình như thế nào?
+
+Đó là lý do website Mật Tông Việt được xây dựng.
+
+Không phải để biến Kim Cang thừa thành một thế giới bí ẩn nhằm thu hút sự tò mò.
+
+Không phải để hứa hẹn rằng một câu chú, một nghi lễ hay một vật phẩm có thể thay con người giải quyết mọi khó khăn.
+
+Cũng không phải để thay thế Đạo sư, truyền thừa và quá trình tu học nghiêm túc.
+
+Mật Tông Việt mong muốn trở thành một không gian giúp người Việt tiếp cận Phật giáo Mật tông bằng ba điều:
+
+Hiểu đúng hơn.
+Tìm hiểu có hệ thống hơn.
+Và biết rõ ranh giới trước khi bước sâu hơn.
+
+Trên website, chúng tôi đang từng bước xây dựng một hệ thống nội dung dành cho cả người mới tìm hiểu và người đã thực hành.
+
+Người mới có thể bắt đầu từ những câu hỏi nền tảng về nhân vật, truyền thừa, con đường tu học, chú ngữ, biểu tượng và pháp khí.
+
+Người đã có thời gian thực hành có thể cùng soi chiếu một câu hỏi sâu hơn:
+
+Sau những thời khóa, điều gì đã thực sự thay đổi trong lời nói, cảm xúc, trách nhiệm và cách ta đối xử với những người gần mình nhất?
+
+Bởi việc tu không chỉ được nhìn thấy khi ta ngồi trước bàn thờ.
+
+Nó còn hiện ra trong một bữa cơm gia đình, một lần bất đồng, một ngày công việc không thuận lợi hay khoảnh khắc ta có thể dừng lại trước khi làm người khác tổn thương.
+
+Website Mật Tông Việt được tổ chức thành những khu vực rõ ràng:
+
+– Blog chia sẻ kiến thức và giải đáp những băn khoăn thường gặp.
+– FAQ giúp người đọc bắt đầu từ những câu hỏi cụ thể.
+– Kho tài liệu dành cho quá trình tìm hiểu có hệ thống.
+– Nội dung song ngữ Việt – Anh để mở rộng khả năng tiếp cận và đối chiếu.
+– Không gian giới thiệu tượng, đồ thờ, pháp khí, tranh Thangka và các văn hóa phẩm Phật giáo.
+
+Với các vật phẩm, chúng tôi không chỉ muốn giới thiệu một món đồ đẹp.
+
+Mỗi hình tượng, pháp khí hay vật phẩm đều cần được tiếp cận bằng sự hiểu biết về ý nghĩa, hoàn cảnh sử dụng và giới hạn của nó — không thần bí hóa, không gán cho vật phẩm những lời hứa vượt quá giá trị chân thực.
+
+Cấu trúc đầu tiên của website đã hoàn thành.
+
+Nhưng đây chưa phải điểm kết thúc.
+
+Đây mới là nền móng để kho nội dung Mật Tông Việt được cập nhật từng bước theo một lộ trình nhất quán: từ kiến thức nền tảng đến con đường tu học, từ truyền thừa đến đời sống, từ biểu tượng và pháp khí đến những ứng dụng gần gũi với người Việt hôm nay.
+
+Chúng tôi không mong bạn tin ngay mọi điều mình đọc được.
+
+Chúng tôi mong bạn biết đặt câu hỏi, biết đối chiếu, nhận ra đâu là kiến thức phổ thông và đâu là phần cần tìm đến một vị thầy cùng truyền thừa chân chính.
+
+Nếu bạn là người mới, hy vọng website này giúp bạn bớt lạc giữa quá nhiều thông tin.
+
+Nếu bạn đã thực hành, hy vọng đây là nơi chúng ta có thể cùng nhìn lại những điều tưởng đã quen thuộc bằng một tâm thế cởi mở và tỉnh táo hơn.
+
+Và dù đang đứng ở đâu trên hành trình, mong rằng mỗi người khi rời khỏi một bài viết đều có thể mang theo không chỉ thêm một điều để biết, mà còn một điều để soi lại trong chính đời sống của mình.
+
+Mời bạn ghé thăm Mật Tông Việt tại:
+
+https://mattongviet.com
+
+Bạn đang muốn tìm hiểu điều gì đầu tiên về Mật tông?
+
+Hãy để lại câu hỏi. Biết đâu chính câu hỏi của bạn sẽ trở thành một trong những bài viết tiếp theo trên Mật Tông Việt.
+
+MẬT TÔNG VIỆT
+Trí tuệ soi đường – Từ bi dẫn lối.`,
+    aboutCard1Title: "Nền tảng tri thức",
+    aboutCard1Text: "Hiểu Mật tông từ truyền thừa, nhân vật, chú ngữ, biểu tượng và các khái niệm căn bản trước khi đi sâu hơn.",
+    aboutCard2Title: "Giáo lý và ranh giới",
+    aboutCard2Text: "Phân biệt kiến thức chân chính với thông tin lan truyền, biết đâu là học tập và đâu là cần thầy cùng truyền thừa hướng dẫn.",
+    aboutCard3Title: "Tu trong đời sống",
+    aboutCard3Text: "Thực hành không chỉ ở bàn thờ mà còn thấy rõ trong lời nói, cảm xúc, trách nhiệm và cách ta đối xử với người thân.",
     practiceTitle: "Thực hành",
     pill1: "Pháp tu",
     pill2: "Chú nguyện",
@@ -273,13 +362,102 @@ const translations = {
     faqQuestion3: "Is this suitable for beginners?",
     faqAnswer3: "Yes, there are gentle foundational practices aimed at mindful awareness and ease for beginners.",
     aboutTitle: "About",
-    aboutIntroText: "This website is a bilingual Tantric Buddhist space focused on practice, teachings, and interactive content that brings calm to the mind.",
-    aboutCard1Title: "Origins",
-    aboutCard1Text: "Tantric Buddhism is a Vajrayana tradition that emphasizes meditation, mantra, and sacred symbols.",
-    aboutCard2Title: "Teachings",
-    aboutCard2Text: "Inner inquiry, recognizing the mind, and opening wisdom through spiritual practice.",
-    aboutCard3Title: "Practice",
-    aboutCard3Text: "From mantra recitation to visualization, practice supports resilience and mindful presence.",
+    aboutIntroText: `MẬT TÔNG VIỆT – WHEN PEOPLE WANT TO LEARN, THEY NEED A PLACE TO BEGIN
+
+You may know Tantra from a mantra you heard during a period of emotional turbulence.
+
+You may have paused before a Thangka, a statue, or a Vajra and asked:
+
+“What do these images really mean?”
+
+Or perhaps you have practiced for some time, but the more you learn, the more you realize you are caught between many streams of information:
+
+Some places describe Tantra as something far away and distant.
+
+Others emphasize mystical experience, power, and extraordinary states.
+
+Meanwhile, the most basic questions are often still left unanswered:
+
+What is Tantra really?
+
+Where should a beginner start?
+
+What can be learned from books and articles?
+
+What requires guidance, transmission, and permission from a teacher of genuine quality?
+
+And more importantly: how can the teaching enter the family, work, and the way we face ourselves?
+
+That is why Mật Tông Việt was created.
+
+Not to turn the Vajra into a mysterious world designed merely to attract curiosity.
+
+Not to promise that a mantra, a ritual, or a sacred object can replace a person’s effort to resolve every difficulty.
+
+And not to replace the teacher, lineage, and serious practice.
+
+Mật Tông Việt hopes to become a space where Vietnamese people can approach Tantric Buddhism with three things in mind:
+
+Understand more accurately.
+Study in a more systematic way.
+And know the boundaries before going deeper.
+
+On this website, we are gradually building a content system for both newcomers and practitioners.
+
+Beginners can start with foundational questions about figures, lineages, the path, mantras, symbols, and sacred implements.
+
+Experienced practitioners can also reflect on deeper questions:
+
+After many teachings, what has truly changed in the way we speak, feel, take responsibility, and treat the people closest to us?
+
+Because practice is not only visible when we sit before the altar.
+
+It also appears at family meals, during conflict, on difficult workdays, and in the moments when we pause before hurting others.
+
+Mật Tông Việt is organized into clear sections:
+
+– Blog for sharing knowledge and addressing common concerns.
+– FAQ to help readers begin with specific questions.
+– Resource library for a more systematic learning process.
+– Bilingual Vietnamese–English content to widen access and cross-reference understanding.
+– A space introducing statues, altar objects, sacred tools, Thangka paintings, and Buddhist cultural items.
+
+For each object, we do not want to present only a beautiful item.
+
+Every image, sacred implement, or object should be approached with understanding of its meaning, context of use, and limits — without mystifying it, and without assigning promises beyond its real value.
+
+The first structure of the website is complete.
+
+But this is not the end.
+
+This is only the foundation for the Mật Tông Việt content library, which will be updated step by step in a consistent path: from basic knowledge to the path of practice, from lineage to daily life, and from symbols and implements to applications relevant to Vietnamese people today.
+
+We do not expect you to believe everything you read immediately.
+
+We hope you will ask questions, compare sources, and recognize what is general knowledge and what requires a teacher and authentic lineage.
+
+If you are new, we hope this website helps you avoid getting lost amid too much information.
+
+If you are already practicing, we hope this becomes a place where we can look back at what seems familiar with a more open and sober mind.
+
+And wherever you are on the path, may each person leave a post with not only more to know, but also something to reflect on in real life.
+
+Come visit Mật Tông Việt at:
+
+https://mattongviet.com
+
+What would you like to understand first about Tantra?
+
+Leave your question. Perhaps it will become one of the next articles on Mật Tông Việt.
+
+MẬT TÔNG VIỆT
+Wisdom illuminates the path — compassion guides the way.`,
+    aboutCard1Title: "Foundational knowledge",
+    aboutCard1Text: "Understand Tantra through lineage, teachers, mantras, symbols, and core concepts before moving into deeper practice.",
+    aboutCard2Title: "Teachings and boundaries",
+    aboutCard2Text: "Distinguish authentic teachings from popular myths, and know when guidance from a qualified teacher and lineage is essential.",
+    aboutCard3Title: "Practice in daily life",
+    aboutCard3Text: "Practice is not only at the altar; it appears in speech, emotion, responsibility, and the way we treat people closest to us.",
     practiceTitle: "Practice",
     pill1: "Practice",
     pill2: "Mantra",
