@@ -989,6 +989,40 @@ if (initialFilter) {
 // apply filter on load
 applyProductFilter();
 
+function syncBlogFilterSummary() {
+  const summary = document.querySelector('.blog-filter-menu summary');
+  if (!summary) return;
+
+  const activeButton = document.querySelector('.blog-category-filters button.active');
+  const label = activeButton ? activeButton.textContent.trim() : 'Tất cả';
+  summary.textContent = `Lọc theo chủ đề: ${label}`;
+}
+
+function applyBlogCategoryFilter() {
+  const activeFilter = document.querySelector('.blog-category-filters button.active')?.dataset.blogFilter || 'all';
+  const cards = document.querySelectorAll('.blog-grid .card-link, .blog-landing-grid .card-link');
+
+  cards.forEach(card => {
+    const category = (card.dataset.category || 'all');
+    const shouldShow = activeFilter === 'all' || category === activeFilter;
+    card.classList.toggle('hidden', !shouldShow);
+  });
+
+  syncBlogFilterSummary();
+}
+
+document.querySelectorAll('.blog-category-filters button').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.blog-category-filters button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    applyBlogCategoryFilter();
+    const details = document.querySelector('.blog-filter-menu');
+    if (details) details.open = false;
+  });
+});
+
+applyBlogCategoryFilter();
+
 // Load content index (thumbnails, excerpts) and auto-fill listing cards
 fetch('content.json').then(r => r.ok ? r.json() : null).then(content => {
   if (!content) return;
