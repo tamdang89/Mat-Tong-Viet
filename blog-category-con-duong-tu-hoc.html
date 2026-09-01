@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Con đường tu học - Blog</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Breadcrumb Navigation */
+    .breadcrumb {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 1rem 0 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .breadcrumb a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .breadcrumb a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    
+    .breadcrumb span {
+      color: var(--muted);
+    }
+
+    /* Category Header */
+    .category-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+    
+    .category-header h1 {
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      margin: 0 0 0.5rem 0;
+      color: var(--primary-dark);
+    }
+    
+    .category-header p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Search & Filter Section */
+    .blog-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .blog-search-box {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+    
+    .blog-search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 2px solid var(--accent-soft);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: var(--surface);
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    
+    .blog-search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+    }
+    
+    .blog-search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* Sort Dropdown */
+    .blog-sort {
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--accent-soft);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    
+    .blog-sort:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Post Count */
+    .post-count {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    /* Blog Grid - Optimized for 3 columns */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Blog Card Enhancements */
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(68, 40, 24, 0.08);
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      height: 100%;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .card-content h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: var(--primary-dark);
+    }
+
+    .card-content p {
+      margin: 0 0 1rem 0;
+      flex: 1;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .card-button {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .card-button:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+    }
+
+    .empty-state h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--primary-dark);
+    }
+
+    /* Responsive Controls */
+    @media (max-width: 640px) {
+      .blog-controls {
+        flex-direction: column;
+      }
+      
+      .blog-search-box {
+        min-width: unset;
+      }
+      
+      .blog-sort {
+        width: 100%;
+      }
+
+      .category-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1 data-i18n="title">Mật Tông Việt</h1>
+          <p data-i18n="subtitle">TRÍ TUỆ SOI ĐƯỜNG - TỪ BI DẪN LỐI</p>
+        </div>
+      </div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html" data-i18n="navHome">Trang chủ</a>
+        <div class="has-submenu">
+          <a href="products.html" class="submenu-toggle" data-i18n="navProducts">Sản phẩm ▾</a>
+          <div class="submenu" aria-label="Sản phẩm danh mục">
+            <a href="products.html?cat=tuong" data-i18n="submenuStatue">Tượng</a>
+            <a href="products.html?cat=do-tho" data-i18n="submenuOffering">Đồ Thờ</a>
+            <a href="products.html?cat=phap-khi" data-i18n="submenuSacred">Pháp Khí</a>
+            <a href="products.html?cat=tranh" data-i18n="submenuThangka">Tranh (Thangka)</a>
+            <a href="products.html?cat=vat-pham-oto" data-i18n="submenuFengShui">Vật Phẩm Phong Thuỷ</a>
+          </div>
+        </div>
+        <a href="blog.html" data-i18n="navBlog">Blog</a>
+        <a href="faq.html" data-i18n="navFaq">FAQ</a>
+        <a href="download.html">Download</a>
+        <a href="contact.html" data-i18n="navContact">Liên hệ</a>
+      </nav>
+      <div class="lang-switch">
+        <button id="viBtn" class="active">Tiếng Việt</button>
+        <button id="enBtn">English</button>
+      </div>
+      <a href="cart.html" class="cart-header-link" title="Giỏ hàng">
+        Giỏ hàng <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="card-section blog-section">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb navigation">
+        <a href="index.html">Trang chủ</a>
+        <span>›</span>
+        <a href="blog.html">Blog</a>
+        <span>›</span>
+        <span>Con đường tu học</span>
+      </nav>
+
+      <!-- Category Header -->
+      <div class="category-header">
+        <h1>Con đường tu học</h1>
+        <p>Hướng dẫn từng bước để xây dựng lộ trình tu tập rõ ràng, an nhiên và bền vững. Từ việc thiết lập kỷ luật hàng ngày đến việc vượt qua những thách thức, những bài viết này sẽ hỗ trợ bạn trên hành trình.</p>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div class="blog-controls">
+        <div class="blog-search-box">
+          <input type="text" id="searchInput" placeholder="Tìm kiếm bài viết..." aria-label="Tìm kiếm bài viết">
+        </div>
+        <select class="blog-sort" id="sortSelect" aria-label="Sắp xếp bài viết">
+          <option value="newest">Mới nhất</option>
+          <option value="oldest">Cũ nhất</option>
+          <option value="title">Theo tiêu đề (A-Z)</option>
+        </select>
+        <div class="post-count">
+          <span id="postCount">15</span> bài viết
+        </div>
+      </div>
+
+      <!-- Blog Grid -->
+      <div class="card-grid blog-grid" id="blogGrid">
+        <!-- Post 1 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · CÓ CẤU TRÚC</span>
+              <h3>Xây dựng lộ trình tu tập hàng ngày</h3>
+              <p>Hướng dẫn cách thiết lập một thời gian biểu tu tập bền vững, phù hợp với cuộc sống bận rộn của bạn.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 2 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · NGƯỜI MỚI</span>
+              <h3>Bước đầu tiên: Thiền định căn bản</h3>
+              <p>Học cách ngồi, thở đúng cách và giữ tâm tập trung trong 10-20 phút đầu tiên.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 3 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · PHÁT TRIỂN</span>
+              <h3>Nâng cao: Khi thiền định trở nên khó khăn</h3>
+              <p>Cách vượt qua những chướng ngại như đau nhức, ngủ gật, tâm loạn khi tu.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 4 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · NÂNG CAO</span>
+              <h3>Thiền định nâng cao: Nội quán sâu</h3>
+              <p>Kỹ thuật nội quán sâu sắc để khám phá bản chất của tâm và hiện tượng.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 5 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · LIÊN HỆ</span>
+              <h3>Tu học trong cuộc sống hàng ngày</h3>
+              <p>Cách mang tâm tu vào công việc, quan hệ gia đình và giao tiếp xã hội.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 6 -->
+        <a class="card-link" href="#">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">THỰC HÀNH · HỖ TRỢ</span>
+              <h3>Khi gặp khó khăn trên con đường tu</h3>
+              <p>Giải pháp cho những khoảnh khắc nghi ngờ, mệt mỏi hoặc mất phương hướng.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+
+        <!-- Post 7-15 -->
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 7</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 8</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 9</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 10</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 11</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 12</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 13</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 14</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+        <a class="card-link" href="#"><article class="card blog-card"><div class="card-image"></div><div class="card-content"><span class="card-tag">THỰC HÀNH</span><h3>Bài viết số 15</h3><p>Nội dung mô tả...</p><span class="card-button">Đọc bài viết →</span></div></article></a>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <h3>Không tìm thấy bài viết</h3>
+        <p>Hãy thử tìm kiếm với từ khóa khác hoặc quay lại trang chính.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="footer-grid">
+        <div class="footer-column footer-contact">
+          <h3>LIÊN HỆ</h3>
+          <div class="footer-box">
+            <p><strong>CH Văn Hoá Phẩm Phật Giáo TTH</strong></p>
+            <p>Địa chỉ: 210 Hà Huy Tập, Tp Đà Nẵng</p>
+            <p>Điện thoại: 0888633133</p>
+            <p>Email: TTHGroup@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const blogGrid = document.getElementById('blogGrid');
+    const emptyState = document.getElementById('emptyState');
+    const postCount = document.getElementById('postCount');
+    const cardLinks = Array.from(document.querySelectorAll('.card-link'));
+
+    function updateDisplay() {
+      const visibleCards = cardLinks.filter(card => card.style.display !== 'none');
+      if (visibleCards.length === 0) {
+        blogGrid.style.display = 'none';
+        emptyState.style.display = 'block';
+      } else {
+        blogGrid.style.display = 'grid';
+        emptyState.style.display = 'none';
+        postCount.textContent = visibleCards.length;
+      }
+    }
+
+    function filterPosts() {
+      const searchTerm = searchInput.value.toLowerCase();
+      cardLinks.forEach(card => {
+        const h3 = card.querySelector('h3').textContent.toLowerCase();
+        const p = card.querySelector('p').textContent.toLowerCase();
+        card.style.display = (h3.includes(searchTerm) || p.includes(searchTerm)) ? '' : 'none';
+      });
+      updateDisplay();
+    }
+
+    searchInput.addEventListener('input', filterPosts);
+    sortSelect.addEventListener('change', filterPosts);
+    updateDisplay();
+  </script>
+
+  <script src="script.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>
