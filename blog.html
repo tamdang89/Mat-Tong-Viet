@@ -45,32 +45,96 @@
 
   <main>
     <section class="card-section blog-section">
-      <h2 data-i18n="blogTitle">Blog</h2>
+      <h2>Nhân vật &amp; Nền tảng</h2>
+
+      <div class="blog-category-filter-wrap">
+        <details class="blog-filter-menu">
+          <summary>Lọc theo chủ đề: Tất cả</summary>
+          <div class="blog-category-filters" aria-label="Bộ lọc danh mục bài viết">
+            <button type="button" class="active" data-blog-filter="all">Tất cả</button>
+            <button type="button" data-blog-filter="nen-tang-phat-giao-kim-cang-thua">Nền tảng Phật giáo &amp; Kim Cang thừa</button>
+            <button type="button" data-blog-filter="giao-ly-phat-giao-can-ban">Giáo lý Phật giáo căn bản</button>
+            <button type="button" data-blog-filter="kinh-dien-nguon-hoc">Kinh điển &amp; Nguồn học</button>
+            <button type="button" data-blog-filter="chu-phat-bo-tat">Chư Phật &amp; Bồ Tát</button>
+            <button type="button" data-blog-filter="duc-lien-hoa-sinh">Đức Liên Hoa Sinh</button>
+            <button type="button" data-blog-filter="duc-tara-do-mau">Đức Tara – Độ Mẫu</button>
+            <button type="button" data-blog-filter="duc-kim-cang-tat-doa">Đức Kim Cang Tát Đỏa</button>
+            <button type="button" data-blog-filter="duc-kim-cang-tri">Đức Kim Cang Trì</button>
+            <button type="button" data-blog-filter="dao-su-trong-kim-cang-thua">Đạo sư trong Kim Cang thừa</button>
+            <button type="button" data-blog-filter="truyenthong-nyingma">Truyền thống Nyingma</button>
+            <button type="button" data-blog-filter="truyenthong-kagyu">Truyền thống Kagyu</button>
+            <button type="button" data-blog-filter="truyenthong-sakya">Truyền thống Sakya</button>
+            <button type="button" data-blog-filter="truyenthong-gelug">Truyền thống Gelug</button>
+            <button type="button" data-blog-filter="kim-cang-thua-ngay-nay">Kim Cang thừa ngày nay</button>
+            <button type="button" data-blog-filter="tong-ket-ban-do-hoc-tap">Tổng kết &amp; Bản đồ học tập</button>
+          </div>
+        </details>
+      </div>
+
       <div class="card-grid blog-grid">
-        <a class="card-link" href="blog-post-1.html">
+        <a class="card-link" href="blog-post-1.html" data-category="chu-phat-bo-tat">
           <article class="card blog-card">
             <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
             <div class="card-content">
-              <h3 data-i18n="blogPost1Title">Hành trình giác ngộ</h3>
-              <p data-i18n="blogPost1Text">Bài viết về phương pháp thực hành hàng ngày để nuôi dưỡng tâm bình an.</p>
+              <span class="card-tag">KIẾN THỨC NỀN TẢNG · NGƯỜI MỚI</span>
+              <h3>Đức Phật Thích Ca Mâu Ni là ai?</h3>
+              <p>Mô tả cuộc đời, con đường giác ngộ và nền tảng giáo pháp của Đức Phật. Từ sự nhìn thấy khổ đau đến trí tuệ giác ngộ, chúng ta hiểu rõ gốc rễ của con đường Phật giáo.</p>
+              <span class="card-button">Đọc bài viết →</span>
             </div>
           </article>
         </a>
-        <a class="card-link" href="blog-post-2.html">
+        <a class="card-link" href="blog-post-2.html" data-category="nen-tang-phat-giao-kim-cang-thua">
           <article class="card blog-card">
             <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
             <div class="card-content">
-              <h3 data-i18n="blogPost2Title">Chuyển hóa tâm</h3>
-              <p data-i18n="blogPost2Text">Cách sử dụng chú nguyện trong đời sống hiện đại để cân bằng cảm xúc.</p>
+              <span class="card-tag">KIẾN THỨC NỀN TẢNG · NGƯỜI MỚI</span>
+              <h3>Kim Cang thừa là gì?</h3>
+              <p>Giải thích Kim Cang thừa bằng ngôn ngữ dễ hiểu và mối liên hệ với Phật giáo. Đây là một con đường rèn tâm bằng trí tuệ, không lạc vào thần bí hoặc chấp ngộ sai.</p>
+              <span class="card-button">Đọc bài viết →</span>
             </div>
           </article>
         </a>
-        <a class="card-link" href="blog-post-3.html">
+        <a class="card-link" href="blog-post-3.html" data-category="nen-tang-phat-giao-kim-cang-thua">
           <article class="card blog-card">
             <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
             <div class="card-content">
-              <h3 data-i18n="blogPost3Title">Nguyên tắc Mật tông</h3>
-              <p data-i18n="blogPost3Text">Giới thiệu các nguyên lý cơ bản của giáo lý Mật tông và ý nghĩa của chúng.</p>
+              <span class="card-tag">THỰC HÀNH · NGƯỜI MỚI</span>
+              <h3>Người mới nên bắt đầu từ đâu?</h3>
+              <p>Gợi ý lộ trình tìm hiểu Mật tông có hệ thống, an toàn và không rơi vào thần bí. Bắt đầu từ nền tảng sẽ giúp bạn học sâu mà không mất phương hướng.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+        <a class="card-link" href="blog-post-4.html" data-category="giao-ly-phat-giao-can-ban">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">PHẬT HỌC CƠ BẢN</span>
+              <h3>Tứ Diệu Đế là gì?</h3>
+              <p>Tìm hiểu bốn sự thật nền tảng về khổ đau, nguyên nhân và con đường chuyển hóa. Đây là chân lý cốt lõi giúp bạn thấy rõ nền móng của Phật giáo.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+        <a class="card-link" href="blog-post-5.html" data-category="kinh-dien-nguon-hoc">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">PHẬT HỌC · NỀN TẢNG</span>
+              <h3>Kinh điển Phật giáo là gì?</h3>
+              <p>Kinh điển là văn bản gốc, luận giải là diễn giải, và hiểu rõ sự phân biệt giúp bạn tránh tin những nội dung Phật học lan truyền trên mạng thiếu kiểm chứng.</p>
+              <span class="card-button">Đọc bài viết →</span>
+            </div>
+          </article>
+        </a>
+        <a class="card-link" href="blog-post-6.html" data-category="duc-lien-hoa-sinh">
+          <article class="card blog-card">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(195, 107, 24, 0.2), rgba(121, 61, 21, 0.3)), url('data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop stop-color='%23a65b1a'/%3E%3Cstop offset='1' stop-color='%23e5d0a5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23g)'/%3E%3Ccircle cx='190' cy='180' r='120' fill='rgba(255,255,255,0.18)'/%3E%3Cpath d='M0 640C180 540 260 500 420 560C560 615 690 640 1200 520V800H0V640Z' fill='rgba(56,34,22,0.25)'/%3E%3C/svg%3E');"></div>
+            <div class="card-content">
+              <span class="card-tag">NHÂN VẬT · KIM CANG THỪA</span>
+              <h3>Đức Liên Hoa Sinh là ai?</h3>
+              <p>Tìm hiểu cuộc đời, vai trò và ý nghĩa của Đức Liên Hoa Sinh trong Kim Cang thừa, với sự nhấn mạnh vào hạt nhân sáng tạo, sống động và giác ngộ của truyền thừa này.</p>
+              <span class="card-button">Đọc bài viết →</span>
             </div>
           </article>
         </a>
