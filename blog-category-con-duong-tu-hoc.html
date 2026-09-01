@@ -243,6 +243,31 @@
         font-size: 1.5rem;
       }
     }
+
+    /* Back to Blog Section */
+    .back-to-blog {
+      text-align: center;
+      margin: 3rem 0 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--accent-soft);
+    }
+
+    .back-to-blog a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-soft);
+      color: var(--primary-dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .back-to-blog a:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(68, 40, 24, 0.12);
+    }
   </style>
 </head>
 <body>
@@ -410,6 +435,13 @@
       <div class="empty-state" id="emptyState" style="display: none;">
         <h3>Không tìm thấy bài viết</h3>
         <p>Hãy thử tìm kiếm với từ khóa khác hoặc quay lại trang chính.</p>
+      </div>
+
+      <!-- Back to Blog -->
+      <div class="back-to-blog">
+        <a href="index.html">← Quay lại trang chủ</a>
+        <span style="margin: 0 1rem; color: var(--muted);">|</span>
+        <a href="blog.html">Xem tất cả bài Blog →</a>
       </div>
     </section>
   </main>
